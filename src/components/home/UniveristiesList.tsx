@@ -66,15 +66,15 @@ const UniveristiesList = () => {
         {unis.map((stat, index) => (
           <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/4">
             <div className="p-1">
-              <div className="shadow-md p-8">
+              <div className="shadow-md p-4 md:p-8">
                 <img
                   src={stat.icon}
                   alt={stat.title}
-                  className="w-24 h-24 object-cover"
+                  className="w-12 h-12 md:w-24 md:h-24 object-cover"
                 />
                 <div className="mt-10">
-                  <h1 className="font-bold text-xl">{stat.title}</h1>
-                  <p className="mt-1 text-sm">{stat.description}</p>
+                  <h1 className="font-bold md:text-xl">{stat.title}</h1>
+                  <p className="mt-1 text-xs md:text-sm">{stat.description}</p>
                 </div>
               </div>
             </div>

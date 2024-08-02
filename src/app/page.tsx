@@ -17,7 +17,7 @@ export default function Home() {
       </div>
 
       
-      <div className="w-10/12 mx-auto mt-6 md:mt-40">
+      <div className="w-8/12 md:w-10/12 mx-auto mt-12 md:mt-40">
         <UniveristiesList />
       </div>
 
