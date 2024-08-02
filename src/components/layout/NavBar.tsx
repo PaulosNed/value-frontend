@@ -36,7 +36,7 @@ const NavBar = () => {
   ];
   return (
     <NavigationMenu>
-      <div className="w-screen md:px-10 md:py-6 flex justify-between items-center z-20">
+      <div className="w-screen px-6 py-4 md:px-10 md:py-6 flex justify-between items-center z-20">
         {/* Logo section */}
         <Link href="/" passHref className="w-2/12">
           <div className="flex items-center justify-start">
@@ -53,7 +53,7 @@ const NavBar = () => {
 
         {/* Navigation menu */}
         <NavigationMenuList>
-          <div className="flex">
+          <div className="hidden md:flex">
             {navItems.map((item, index) => (
               <NavLink key={index} name={item.name} link={item.link} />
             ))}
@@ -61,7 +61,7 @@ const NavBar = () => {
         </NavigationMenuList>
 
         {/* Signup button */}
-        <div className="w-2/12 flex space-x-4 justify-end">
+        <div className="hidden md:flex w-2/12 space-x-4 justify-end">
           <Button
             asChild
             className="px-6 border border-primary"
@@ -73,6 +73,7 @@ const NavBar = () => {
             <Link href={"/signup"}>Sign up</Link>
           </Button>
         </div>
+        
       </div>
     </NavigationMenu>
   );
