@@ -27,7 +27,7 @@ export default function Home() {
         <HowWeWork />
       </div>
 
-      <div className="mt-12 md:mt-32">
+      <div className="p-4 w-full md:w-9/12 md:mx-auto mt-12 md:mt-32">
         <WhatWeDo />
       </div>
 
