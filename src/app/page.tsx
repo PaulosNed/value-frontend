@@ -1,7 +1,9 @@
 import AboutSection from "@/components/home/AboutSection";
 import HeroSection from "@/components/home/HeroSection";
+import HowWeWork from "@/components/home/HowWeWork";
 import StatSection from "@/components/home/StatSection";
 import UniveristiesList from "@/components/home/UniveristiesList";
+import WhatWeDo from "@/components/home/WhatWeDo";
 
 export default function Home() {
   return (
@@ -19,6 +21,14 @@ export default function Home() {
       
       <div className="w-8/12 md:w-10/12 mx-auto mt-12 md:mt-40">
         <UniveristiesList />
+      </div>
+
+      <div className="mt-12 md:mt-32">
+        <HowWeWork />
+      </div>
+
+      <div className="mt-12 md:mt-32">
+        <WhatWeDo />
       </div>
 
       <div className="h-20"></div>

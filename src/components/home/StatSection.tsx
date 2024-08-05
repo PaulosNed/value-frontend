@@ -33,7 +33,7 @@ const StatSection = () => {
     },
   ];
   return (
-    <div className="w-9/12 mx-auto">
+    <div className="w-8/12 mx-auto">
       <div className="flex flex-col md:flex-row md:justify-between gap-4 md:gap-20">
         {stats.map((stat, index) => (
           <Card key={index} className="md:w-4/12 flex flex-col items-center justify-center md:gap-4 shadow-md">
