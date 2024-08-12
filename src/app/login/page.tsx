@@ -5,7 +5,9 @@ import React from "react";
 const LoginPage = () => {
   return (
     <div className="flex w-full md:w-3/4 mx-auto h-[500px] items-center md:shadow-custom-blue md:rounded-lg md:mt-10">
-      <div className="hidden md:block w-1/2 h-full bg-black"></div>
+      <div className="hidden md:block w-1/2 h-full backdrop:">
+        <img src="/images/auth/bgImg.svg" alt="Auth bg" className="w-full h-full object-cover"/>
+      </div>
       <div className="w-full mx-10 md:mx-0 md:w-1/2">
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">

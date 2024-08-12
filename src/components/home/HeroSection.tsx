@@ -19,7 +19,7 @@ const HeroSection = () => {
         <p className="text-primary-opacity-25 text-opacity-25 mt-8 md:mt-4 text-center">Redefining the College Application process in Ethiopia.</p>
         {/* two action buttons */}
         <div className="mt-12 flex flex-col md:flex-row w-full md:w-fit gap-3 md:gap-8">
-            <Button className="px-12">Learn More</Button>
+            <Button className="px-12 py-2">Learn More</Button>
             <Button variant="outline" className="px-12 border border-primary">Apply Now</Button>
         </div>
       </div>
