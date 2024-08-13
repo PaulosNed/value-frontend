@@ -20,6 +20,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useLoginMutation } from "@/store/users/usersApi";
+import { useRouter } from 'next/navigation'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -30,6 +32,8 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [login, { data, isError, isSuccess }] = useLoginMutation();
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,9 +49,23 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     // ✅ This will be type-safe and validated.
     console.log(values);
 
-    setTimeout(() => {
+    const requestBody = {
+      username: values.email,
+      password: values.password,
+    }
+
+    const response: any = await login(requestBody);
+
+    if (response.data !== null) {
+      localStorage.setItem("access", response.data.access)
+      localStorage.setItem("refresh", response.data.refresh)
+      console.log(localStorage.getItem("access"));
+      router.push('/')
       setIsLoading(false);
-    }, 2000);
+    } else {
+      console.log("Error found")
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -108,7 +126,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 )}
               />
             </div>
-            
+
             <Button disabled={isLoading}>
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
