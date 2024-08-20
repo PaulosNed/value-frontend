@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import { Button } from "../ui/button";
 import NavLink from "./NavLink";
+import { AvatarMenu } from "../profile/AvatarMenu";
 
 const NavBar = () => {
   const navItems = [
@@ -32,6 +33,10 @@ const NavBar = () => {
 
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
 
+  
+  var [token, setToken] = useState(localStorage.getItem("access"))
+
+  
   return (
     <NavigationMenu>
       <div className="w-screen px-6 py-4 md:px-10 md:py-6 flex justify-between items-center z-20">
@@ -58,8 +63,8 @@ const NavBar = () => {
           </div>
         </NavigationMenuList>
 
-        {/* Signup button */}
-        <div className="hidden md:flex w-2/12 space-x-4 justify-end">
+        {/* Authentication buttons for non-authenticated */}
+        {!token && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
           <Button
             asChild
             className="px-6 border border-primary"
@@ -70,7 +75,12 @@ const NavBar = () => {
           <Button asChild className="px-6">
             <Link href={"/signup"}>Sign up</Link>
           </Button>
-        </div>
+        </div>}
+
+        {/* Profiel details for those who are authenticated */}
+        {token && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
+          <AvatarMenu />
+        </div>}
 
         {/* mobile burger */}
         {/* Mobile view */}

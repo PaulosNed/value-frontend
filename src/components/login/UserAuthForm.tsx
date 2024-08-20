@@ -23,6 +23,10 @@ import {
 import { useLoginMutation } from "@/store/users/usersApi";
 import { useRouter } from 'next/navigation'
 
+import { useToast } from "@/components/ui/use-toast"
+import { jwtDecode } from "jwt-decode";
+
+
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const formSchema = z.object({
@@ -32,8 +36,9 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [login, { data, isError, isSuccess }] = useLoginMutation();
+  const [login, { data, error, isError, isSuccess }] = useLoginMutation();
   const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,6 +47,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       password: "",
     },
   });
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -55,15 +61,32 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     }
 
     const response: any = await login(requestBody);
+    console.log(isSuccess)
 
-    if (response.data !== null) {
+    if (!response.error) {
       localStorage.setItem("access", response.data.access)
       localStorage.setItem("refresh", response.data.refresh)
+      
       console.log(localStorage.getItem("access"));
+      
+      const decoded: any = jwtDecode(response.data.access)
+      const user = decoded.user
+      
+      console.log(decoded)
+      toast({
+        variant: "default",
+        title: `Welcome ${user.first_name} ${user.last_name}` ,
+        description: `you have successfully signed in`,
+      })
       router.push('/')
       setIsLoading(false);
     } else {
-      console.log("Error found")
+      console.log("Error found", response)
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: `${response.error.data.detail}`,
+      })
       setIsLoading(false);
     }
   }
