@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/layout/NavBar";
 import StateProvider from "@/components/provider/StateProvider";
 import { Toaster } from "@/components/ui/toaster";
+import SessionWrapper from "@/config/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,20 +20,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <StateProvider>
-        <body className={`${inter.className}`}>
-          {/* Nav section */}
-          <NavBar />
+    <SessionWrapper>
+      <html lang="en">
+        <StateProvider>
+          <body className={`${inter.className}`}>
+            {/* Nav section */}
+            <NavBar />
 
-          {/* Body */}
-          {children}
+            {/* Body */}
+            {children}
 
-          <Toaster />
+            <Toaster />
 
-          {/* footer */}
-        </body>
-      </StateProvider>
-    </html>
+            {/* footer */}
+          </body>
+        </StateProvider>
+      </html>
+    </SessionWrapper>
   );
 }

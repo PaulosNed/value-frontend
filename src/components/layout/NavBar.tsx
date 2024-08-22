@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import NavLink from "./NavLink";
 import { AvatarMenu } from "../profile/AvatarMenu";
+import { useSession } from "next-auth/react";
 
 const NavBar = () => {
   const navItems = [
@@ -32,9 +33,13 @@ const NavBar = () => {
   ];
 
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
-
   
-  var [token, setToken] = useState(localStorage.getItem("access"))
+  const session = useSession()
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(session.status === "authenticated");
+
+  useEffect(() => {
+    setIsAuthenticated(session.status === "authenticated");
+  }, [session]);
 
   
   return (
@@ -64,7 +69,7 @@ const NavBar = () => {
         </NavigationMenuList>
 
         {/* Authentication buttons for non-authenticated */}
-        {!token && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
+        {!isAuthenticated && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
           <Button
             asChild
             className="px-6 border border-primary"
@@ -78,7 +83,7 @@ const NavBar = () => {
         </div>}
 
         {/* Profiel details for those who are authenticated */}
-        {token && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
+        {isAuthenticated && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
           <AvatarMenu />
         </div>}
 

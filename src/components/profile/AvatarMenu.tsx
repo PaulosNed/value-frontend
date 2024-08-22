@@ -33,19 +33,24 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export function AvatarMenu() {
+  const router = useRouter();
 
-    const router = useRouter();
+  const logout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
 
-    const logout = () => {
-        
-        localStorage.removeItem("access");
-        localStorage.removeItem("refresh");
-
+    signOut({ redirect: false })
+      .then(() => {
         router.push("/login");
-    }
-    
+      })
+      .catch((error) => {
+        console.error("Failed to sign out:", error);
+      });
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

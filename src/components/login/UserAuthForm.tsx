@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "@/components/icons";
 
 import { z } from "zod";
@@ -14,7 +14,6 @@ import { Input } from "../ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,7 +23,7 @@ import { useLoginMutation } from "@/store/users/usersApi";
 import { useRouter } from 'next/navigation'
 
 import { useToast } from "@/components/ui/use-toast"
-import { jwtDecode } from "jwt-decode";
+import { signIn, useSession } from "next-auth/react";
 
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -35,7 +34,7 @@ const formSchema = z.object({
 });
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [login, { data, error, isError, isSuccess }] = useLoginMutation();
   const router = useRouter()
   const { toast } = useToast()
@@ -48,34 +47,29 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   });
 
+  const { data: session, status: sessionStatus } = useSession();
+  
+  useEffect(() => {
+    if (sessionStatus === "authenticated") {
+      router.push("/");
+    }
+  }, [sessionStatus, router]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-
-    const requestBody = {
+    
+    const response: any = await signIn("credentials", {
+      redirect: false,
       username: values.email,
       password: values.password,
-    }
+    })
+    
+    if (response && !response.error) {
+      
 
-    const response: any = await login(requestBody);
-    console.log(isSuccess)
-
-    if (!response.error) {
-      localStorage.setItem("access", response.data.access)
-      localStorage.setItem("refresh", response.data.refresh)
-      
-      console.log(localStorage.getItem("access"));
-      
-      const decoded: any = jwtDecode(response.data.access)
-      const user = decoded.user
-      
-      console.log(decoded)
       toast({
         variant: "default",
-        title: `Welcome ${user.first_name} ${user.last_name}` ,
+        title: `Welcome` ,
         description: `you have successfully signed in`,
       })
       router.push('/')
@@ -85,10 +79,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: `${response.error.data.detail}`,
+        description: `${response.error}`,
       })
       setIsLoading(false);
     }
+  }
+
+  function handleGoogleSignin() {
+    setIsLoading(true);
+    const response: any = signIn("google", { callbackUrl: "/" })
+    console.log(response)
+    setIsLoading(false);
   }
 
   return (
@@ -168,7 +169,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </span>
           </div>
         </div>
-        <Button variant="outline" type="button" disabled={isLoading}>
+        <Button variant="outline" type="button" disabled={isLoading} onClick={handleGoogleSignin}>
           {isLoading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
