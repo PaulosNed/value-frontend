@@ -19,12 +19,35 @@ const NavBar = () => {
       link: "/",
     },
     {
-      name: "Courses",
-      link: "/courses",
+      name: "About",
+      link: "#about",
     },
     {
-      name: "About",
-      link: "/about",
+      name: "Universities",
+      link: "#unis",
+    },
+    {
+      name: "Workflow",
+      link: "#workflow",
+    },
+    {
+      name: "Prices",
+      link: "#prices",
+    },
+  ];
+
+  const authenticatedNavItems = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Dashboard",
+      link: "/dashboard",
+    },
+    {
+      name: "Course",
+      link: "/course",
     },
     {
       name: "Community",
@@ -44,7 +67,7 @@ const NavBar = () => {
   
   return (
     <NavigationMenu>
-      <div className="w-screen px-6 py-4 md:px-10 md:py-6 flex justify-between items-center z-20">
+      <div className={`bg-white w-screen px-6 py-4 md:px-10 md:py-6 flex justify-between items-center z-20 border-b shadow-sm`}>
         {/* Logo section */}
         <Link href="/" passHref className="w-2/12">
           <div className="flex items-center justify-start">
@@ -59,14 +82,23 @@ const NavBar = () => {
           </div>
         </Link>
 
-        {/* Navigation menu */}
-        <NavigationMenuList>
+        {/* Unauthenticcated Navigation menu */}
+        {!isAuthenticated && <NavigationMenuList>
           <div className="hidden md:flex">
             {navItems.map((item, index) => (
               <NavLink key={index} name={item.name} link={item.link} />
             ))}
           </div>
         </NavigationMenuList>
+}
+        {/* authenticcated Navigation menu */}
+        {isAuthenticated && <NavigationMenuList>
+          <div className="hidden md:flex">
+            {authenticatedNavItems.map((item, index) => (
+              <NavLink key={index} name={item.name} link={item.link} />
+            ))}
+          </div>
+        </NavigationMenuList>}
 
         {/* Authentication buttons for non-authenticated */}
         {!isAuthenticated && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
@@ -83,7 +115,8 @@ const NavBar = () => {
         </div>}
 
         {/* Profiel details for those who are authenticated */}
-        {isAuthenticated && <div className="hidden md:flex w-2/12 space-x-4 justify-end">
+        {isAuthenticated && <div className="hidden md:flex w-2/12 gap-5 justify-end items-center">
+          <img src="/images/layout/notification.svg" alt="notification bell" className="w-6 h-6 object-cover"/>
           <AvatarMenu />
         </div>}
 

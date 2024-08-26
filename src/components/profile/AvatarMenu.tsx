@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
   LogOut,
   Mail,
   MessageSquare,
@@ -17,7 +12,6 @@ import {
   Users,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,14 +27,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { AvatarDemo } from "./Avator";
 
 export function AvatarMenu() {
   const router = useRouter();
+  const {data: session, status} = useSession();
+  const fallbackText = status === "authenticated" ? ((session?.user as any).first_name[0] + (session?.user as any).last_name[0]) : "U";
+    
 
   const logout = () => {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
 
     signOut({ redirect: false })
       .then(() => {
@@ -53,10 +49,10 @@ export function AvatarMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open</Button>
+      <DropdownMenuTrigger>
+        <AvatarDemo imageSrc="https://ithub.com/shadcn.png" fallbackText={fallbackText} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56 mr-3">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

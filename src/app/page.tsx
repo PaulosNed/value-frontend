@@ -9,22 +9,23 @@ import WhatWeDo from "@/components/home/WhatWeDo";
 export default function Home() {
   return (
     <main className="">
-      <HeroSection />
+      <div id="home">
+        <HeroSection />
+      </div>
 
-      <div className="mt-10">
+      <div className="pt-10">
         <StatSection />
       </div>
 
-      <div className="p-4 md:w-9/12 mx-auto pt-8 md:pt-20">
+      <div className="p-4 md:w-9/12 mx-auto pt-8 md:pt-32" id="about">
         <AboutSection />
       </div>
 
-      
-      <div className="w-8/12 md:w-10/12 mx-auto mt-12 md:mt-40">
+      <div className="w-8/12 md:w-10/12 mx-auto pt-12 md:pt-40" id="unis">
         <UniveristiesList />
       </div>
 
-      <div className="mt-12 md:mt-32">
+      <div className="mt-12 md:mt-32" id="workflow">
         <HowWeWork />
       </div>
 
@@ -32,7 +33,7 @@ export default function Home() {
         <WhatWeDo />
       </div>
 
-      <div className="p-4 w-full md:w-9/12 md:mx-auto mt-12 md:mt-32">
+      <div className="p-4 w-full md:w-9/12 md:mx-auto pt-12 md:pt-32" id="prices">
         <Pricing />
       </div>
 
