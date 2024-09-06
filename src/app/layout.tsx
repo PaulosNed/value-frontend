@@ -30,11 +30,12 @@ export default function RootLayout({
             </div>
 
             {/* Body */}
-            <div className="mt-40">{children}</div>
+            <div className="mt-32 md:mt-40">{children}</div>
 
             <Toaster />
 
             {/* footer */}
+            <div className="py-10"></div>
           </body>
         </StateProvider>
       </html>

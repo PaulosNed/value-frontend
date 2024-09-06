@@ -5,7 +5,7 @@ const HeroSection = () => {
     const bgImageUrl = "/images/home/hero.svg";
   return (
     <div
-      className="w-full min-h-96 mt-5 md:mt-20"
+      className="w-full min-h-96 mt-5 md:mt-10"
       style={{
         backgroundImage: `url(${bgImageUrl})`,
         backgroundSize: "cover",

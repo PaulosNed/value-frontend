@@ -16,7 +16,7 @@ const NavBar = () => {
   const navItems = [
     {
       name: "Home",
-      link: "/",
+      link: "#home",
     },
     {
       name: "About",

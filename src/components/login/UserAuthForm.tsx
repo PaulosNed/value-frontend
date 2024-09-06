@@ -19,7 +19,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useLoginMutation } from "@/store/users/usersApi";
 import { useRouter } from 'next/navigation'
 
 import { useToast } from "@/components/ui/use-toast"
@@ -29,13 +28,12 @@ import { signIn, useSession } from "next-auth/react";
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const formSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email("Invalid Email"),
   password: z.string().min(8),
 });
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [login, { data, error, isError, isSuccess }] = useLoginMutation();
   const router = useRouter()
   const { toast } = useToast()
 

@@ -9,7 +9,7 @@ import WhatWeDo from "@/components/home/WhatWeDo";
 export default function Home() {
   return (
     <main className="">
-      <div id="home">
+      <div id="home" className="pt-10">
         <HeroSection />
       </div>
 
