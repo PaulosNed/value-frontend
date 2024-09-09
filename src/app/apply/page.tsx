@@ -37,6 +37,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 type Inputs = z.infer<typeof FormDataSchema>;
 
 const steps = [
@@ -486,7 +488,7 @@ export default function Page() {
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-full">
-                    <FormField
+                    {/* <FormField
                       control={form.control}
                       name="additionalInformation.dob"
                       render={({ field }) => (
@@ -498,7 +500,7 @@ export default function Page() {
                                 <Button
                                   variant={"outline"}
                                   className={cn(
-                                    "w-[240px] pl-3 text-left font-normal",
+                                    "w-full pl-3 text-left font-normal",
                                     !field.value && "text-muted-foreground"
                                   )}
                                 >
@@ -530,10 +532,28 @@ export default function Page() {
                           <FormMessage />
                         </FormItem>
                       )}
+                    /> */}
+                    <FormField
+                      control={form.control}
+                      name="additionalInformation.dob"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col">
+                          <FormLabel>Date of Birth</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="date"
+                              value={field.value?.toString()}
+                              className="w-full flex justify-between"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="col-span-2">
                     <FormField
                       control={form.control}
                       name="additionalInformation.maritialStatus"
@@ -562,13 +582,107 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-3"></div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="additionalInformation.gender"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Gender</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            autoComplete="sex"
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Gender" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Single">Male</SelectItem>
+                              <SelectItem value="Married">Female</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                  <div className="sm:col-span-2 sm:col-start-1"></div>
+                  <div className="md:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="additionalInformation.passportNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Passport Number</FormLabel>
+                          <Input
+                            type="text"
+                            id="passportNumber"
+                            {...field}
+                            autoComplete="passport-number"
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                  <div className="sm:col-span-2"></div>
+                  <div className="md:col-span-full">
+                    <FormField
+                      control={form.control}
+                      name="additionalInformation.anyDependents"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel>Are you bringing any Dependent?</FormLabel>
+                          <FormControl>
+                            <RadioGroup
+                              value={field.value ? "true" : "false"}  // Reflect the current value
+                              onValueChange={(value) => field.onChange(value === "true")}    //to keep anyDependents boolean
+                              className="flex flex-col space-y-1"
+                            >
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value="true" />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  Yes
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value="false" />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  No
+                                </FormLabel>
+                              </FormItem>
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                  <div className="sm:col-span-2"></div>
+                  <div className="md:col-span-full">
+                    <FormField
+                      control={form.control}
+                      name="additionalInformation.relationShip"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>If Yes, What is your relationShip with the dependant?</FormLabel>
+                          <Input
+                            type="text"
+                            placeholder="Example: Son"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
               </motion.div>
             )}

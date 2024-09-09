@@ -22,7 +22,7 @@ export const FormDataSchema = z.object({
   address: z.object({
     country: z.string().min(1, "Country is required"),
     street: z.string().min(1, "Street is required"),
-    street2: z.string(),
+    street2: z.string().optional(),
     city: z.string().min(1, "City is required"),
     state: z.string().min(1, "State is required"),
     zip: z.string().min(1, "Zip is required"),
@@ -33,7 +33,7 @@ export const FormDataSchema = z.object({
     gender: z.string().min(1, "Gender is required"),
     passportNumber: z.string().min(1, "Passport Number is required"),
     anyDependents: z.boolean(),
-    relationShip: z.string(),
+    relationShip: z.string().optional(),
   }),
   satScore: z.object({
     math: z
