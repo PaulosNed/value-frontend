@@ -60,11 +60,11 @@ export const FormDataSchema = z.object({
     .int()
     .min(0, "Invalid TOEFL Score")
     .max(120, "Invalid TOEFL Score"),
-  // ieltsScore: z
-  //   .number()
-  //   .int()
-  //   .min(0, "Invalid IELTS Score")
-  //   .max(9, "Invalid IELTS Score"),
+  ieltsScore: z
+    .number()
+    .int()
+    .min(0, "Invalid IELTS Score")
+    .max(9, "Invalid IELTS Score"),
   education: z.object({
     tenthGrade: z.object({
       schoolName: z.string().min(1, "School Name is required"),
@@ -73,7 +73,7 @@ export const FormDataSchema = z.object({
         .int()
         .min(1900, "Invalid Year")
         .max(2023, "Invalid Year"),
-      grade: z.string().min(1, "Grade is required"),
+      // grade: z.string().min(1, "Grade is required"),
     }),
     twelvethGrade: z.object({
       schoolName: z.string().min(1, "School Name is required"),
@@ -82,7 +82,7 @@ export const FormDataSchema = z.object({
         .int()
         .min(1900, "Invalid Year")
         .max(2023, "Invalid Year"),
-      grade: z.string().min(1, "Grade is required"),
+      // grade: z.string().min(1, "Grade is required"),
     }),
     bachelors: z.object({
       collegeName: z.string().min(1, "College Name is required"),
@@ -91,7 +91,7 @@ export const FormDataSchema = z.object({
         .int()
         .min(1900, "Invalid Year")
         .max(2023, "Invalid Year"),
-      grade: z.string().min(1, "Grade is required"),
+      // grade: z.string().min(1, "Grade is required"),
     }),
     masters: z.object({
       collegeName: z.string().min(1, "College Name is required"),
@@ -100,7 +100,7 @@ export const FormDataSchema = z.object({
         .int()
         .min(1900, "Invalid Year")
         .max(2023, "Invalid Year"),
-      grade: z.string().min(1, "Grade is required"),
+      // grade: z.string().min(1, "Grade is required"),
     }),
   }),
   emergencyContact: z.object({

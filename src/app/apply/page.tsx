@@ -638,8 +638,10 @@ export default function Page() {
                           <FormLabel>Are you bringing any Dependent?</FormLabel>
                           <FormControl>
                             <RadioGroup
-                              value={field.value ? "true" : "false"}  // Reflect the current value
-                              onValueChange={(value) => field.onChange(value === "true")}    //to keep anyDependents boolean
+                              // value={field.value ? "true" : "false"}  // Reflect the current value
+                              onValueChange={(value) =>
+                                field.onChange(value === "true")
+                              } //to keep anyDependents boolean
                               className="flex flex-col space-y-1"
                             >
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -672,7 +674,10 @@ export default function Page() {
                       name="additionalInformation.relationShip"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>If Yes, What is your relationShip with the dependant?</FormLabel>
+                          <FormLabel>
+                            If Yes, What is your relationShip with the
+                            dependant?
+                          </FormLabel>
                           <Input
                             type="text"
                             placeholder="Example: Son"
@@ -683,6 +688,372 @@ export default function Page() {
                       )}
                     />
                   </div>
+                </div>
+              </motion.div>
+            )}
+
+            {currentStep === 3 && (
+              <motion.div
+                initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  Main Information
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Please provide the informations required below.
+                </p>
+
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>Sat Score</i>
+                    </h2>
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="satScore.math"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Math</FormLabel>
+                          <Input
+                            type="number"
+                            id="math"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="satScore.english"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>English</FormLabel>
+                          <Input
+                            type="number"
+                            id="english"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3"><i>Other Scores</i></h2>
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="toeflScore"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>TOEFL Score</FormLabel>
+                          <Input
+                            type="number"
+                            id="toeflScore"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="ieltsScore"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>IELTS Score</FormLabel>
+                          <Input
+                            type="number"
+                            id="ieltsScore"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>Preffered Country</i>
+                    </h2>
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="prefferedCountry.firstChoice"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>First Choice</FormLabel>
+                          <Input
+                            type="text"
+                            id="firstChoice"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="prefferedCountry.secondChoice"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Second Choice</FormLabel>
+                          <Input
+                            type="text"
+                            id="secondChoice"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>Preffered Major</i>
+                    </h2>
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="prefferedMajor.firstChoice"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>First Choice</FormLabel>
+                          <Input
+                            type="text"
+                            id="firstChoiceMajor"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="prefferedMajor.secondChoice"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Second Choice</FormLabel>
+                          <Input
+                            type="text"
+                            id="secondChoiceMajor"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                </div>
+              </motion.div>
+            )}
+
+            {currentStep === 4 && (
+              <motion.div
+                initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  Education
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Please provide the informations required below.
+                </p>
+
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>10th Grade</i>
+                    </h2>
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="education.tenthGrade.schoolName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>School Name</FormLabel>
+                          <Input
+                            type="text"
+                            id="schoolName10th"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="education.tenthGrade.year"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Year</FormLabel>
+                          <Input
+                            type="number"
+                            id="year10th"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3"><i>12th Grade</i></h2>
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="education.twelvethGrade.schoolName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>School Name</FormLabel>
+                          <Input
+                            type="text"
+                            id="schoolName12th"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="education.twelvethGrade.year"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Year</FormLabel>
+                          <Input
+                            type="number"
+                            id="year12th"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>Bachelors</i>
+                    </h2>
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="education.bachelors.collegeName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>College Name</FormLabel>
+                          <Input
+                            type="text"
+                            id="collegeNameBachelors"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="education.bachelors.year"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Year</FormLabel>
+                          <Input
+                            type="number"
+                            id="yearBachelors"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-1 self-end">
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>Masters</i>
+                    </h2>
+                  </div>
+
+                  <div className="col-span-3">
+                    <FormField
+                      control={form.control}
+                      name="education.masters.collegeName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>College Name</FormLabel>
+                          <Input
+                            type="text"
+                            id="collegeNameMasters"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="education.masters.year"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Year</FormLabel>
+                          <Input
+                            type="number"
+                            id="yearMasters"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
                 </div>
               </motion.div>
             )}
