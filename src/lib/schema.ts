@@ -119,7 +119,7 @@ export const FormDataSchema = z.object({
   }),
   previousEmployment: z.object({
     companyName: z.string().min(1, "Company Name is required"),
-    position: z.string().min(1, "Position is required"),
+    jobTitle: z.string().min(1, "Job Title is required"),
     address: z.string().min(1, "Address is required"),
     startDate: z.date({ message: "Invalid Date" }),
     endDate: z.date({ message: "Invalid Date" }),

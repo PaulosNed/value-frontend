@@ -719,11 +719,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Math</FormLabel>
-                          <Input
-                            type="number"
-                            id="math"
-                            {...field}
-                          />
+                          <Input type="number" id="math" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -737,18 +733,16 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>English</FormLabel>
-                          <Input
-                            type="number"
-                            id="english"
-                            {...field}
-                          />
+                          <Input type="number" id="english" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
                     />
                   </div>
                   <div className="col-span-1 self-end">
-                    <h2 className="text-slate-500 md:py-3"><i>Other Scores</i></h2>
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>Other Scores</i>
+                    </h2>
                   </div>
 
                   <div className="col-span-2">
@@ -758,11 +752,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>TOEFL Score</FormLabel>
-                          <Input
-                            type="number"
-                            id="toeflScore"
-                            {...field}
-                          />
+                          <Input type="number" id="toeflScore" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -776,11 +766,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>IELTS Score</FormLabel>
-                          <Input
-                            type="number"
-                            id="ieltsScore"
-                            {...field}
-                          />
+                          <Input type="number" id="ieltsScore" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -800,11 +786,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>First Choice</FormLabel>
-                          <Input
-                            type="text"
-                            id="firstChoice"
-                            {...field}
-                          />
+                          <Input type="text" id="firstChoice" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -818,11 +800,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Second Choice</FormLabel>
-                          <Input
-                            type="text"
-                            id="secondChoice"
-                            {...field}
-                          />
+                          <Input type="text" id="secondChoice" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -842,11 +820,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>First Choice</FormLabel>
-                          <Input
-                            type="text"
-                            id="firstChoiceMajor"
-                            {...field}
-                          />
+                          <Input type="text" id="firstChoiceMajor" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -870,7 +844,6 @@ export default function Page() {
                       )}
                     />
                   </div>
-
                 </div>
               </motion.div>
             )}
@@ -902,11 +875,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>School Name</FormLabel>
-                          <Input
-                            type="text"
-                            id="schoolName10th"
-                            {...field}
-                          />
+                          <Input type="text" id="schoolName10th" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -920,18 +889,16 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
-                          <Input
-                            type="number"
-                            id="year10th"
-                            {...field}
-                          />
+                          <Input type="number" id="year10th" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
                     />
                   </div>
                   <div className="col-span-1 self-end">
-                    <h2 className="text-slate-500 md:py-3"><i>12th Grade</i></h2>
+                    <h2 className="text-slate-500 md:py-3">
+                      <i>12th Grade</i>
+                    </h2>
                   </div>
 
                   <div className="col-span-3">
@@ -941,11 +908,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>School Name</FormLabel>
-                          <Input
-                            type="text"
-                            id="schoolName12th"
-                            {...field}
-                          />
+                          <Input type="text" id="schoolName12th" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -959,11 +922,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
-                          <Input
-                            type="number"
-                            id="year12th"
-                            {...field}
-                          />
+                          <Input type="number" id="year12th" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -1001,11 +960,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
-                          <Input
-                            type="number"
-                            id="yearBachelors"
-                            {...field}
-                          />
+                          <Input type="number" id="yearBachelors" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -1043,9 +998,39 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
+                          <Input type="number" id="yearMasters" {...field} />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {currentStep === 5 && (
+              <motion.div
+                initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  Emergency Contact Information
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Provide the personal details of your emergency contact.
+                </p>
+                <div className="mt-10 grid grid-cols-6 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="col-span-full md:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="emergencyContact.name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name</FormLabel>
                           <Input
-                            type="number"
-                            id="yearMasters"
+                            type="text"
+                            id="emergencyContactName"
                             {...field}
                           />
                           <FormMessage />
@@ -1054,6 +1039,245 @@ export default function Page() {
                     />
                   </div>
 
+                  <div className="col-span-full md:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="emergencyContact.email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email address</FormLabel>
+                          <Input
+                            type="email"
+                            id="emergencyContactEmail"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="emergencyContact.relation"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Relationship</FormLabel>
+                          <Input
+                            type="text"
+                            id="emergencyContactRelationship"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="sm:col-span-4">
+                    <FormField
+                      control={form.control}
+                      name="emergencyContact.address"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Address</FormLabel>
+                          <Input
+                            type="text"
+                            id="emergencyContactAddress"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="emergencyContact.phoneNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone number</FormLabel>
+                          <Input
+                            type="tel"
+                            id="emergencyContactPhone"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {currentStep === 6 && (
+              <motion.div
+                initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  Previous Employment Information
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  <b>
+                    <i>Note:</i>
+                  </b>{" "}
+                  {`This is only applicable for those with employment history. Feel free to skip this page if you don't have one`}{" "}
+                </p>
+                <div className="mt-10 grid grid-cols-6 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="col-span-full md:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.companyName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Company Name</FormLabel>
+                          <Input
+                            type="text"
+                            id="previousEmploymentCompanyName"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-full md:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.phoneNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Company Phone Number</FormLabel>
+                          <Input
+                            type="text"
+                            id="previousEmploymentPhone"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-full md:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.address"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Company Address</FormLabel>
+                          <Input
+                            type="text"
+                            id="previousEmploymentAddress"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.jobTitle"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Job Title</FormLabel>
+                          <Input
+                            type="text"
+                            id="previousEmploymentJobTitle"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="sm:col-span-4">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.responsibilities"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Responsibilities</FormLabel>
+                          <Input
+                            type="text"
+                            id="previousEmploymentResponsibilities"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  
+                  <div className="sm:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.supervisorName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Supervisor Name</FormLabel>
+                          <Input
+                            type="text"
+                            id="previousEmploymentSupervisorName"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  
+                  <div className="sm:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.startDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Start Date</FormLabel>
+                          <Input
+                              {...field}
+                              type="date"
+                              value={field.value?.toString()}
+                              className="w-full flex justify-between"
+                            />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  
+                  <div className="sm:col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="previousEmployment.endDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>End Date</FormLabel>
+                          <Input
+                              {...field}
+                              type="date"
+                              value={field.value?.toString()}
+                              className="w-full flex justify-between"
+                            />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
               </motion.div>
             )}
