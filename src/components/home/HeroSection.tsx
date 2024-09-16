@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const HeroSection = () => {
     const bgImageUrl = "/images/home/hero.svg";
@@ -20,7 +21,7 @@ const HeroSection = () => {
         {/* two action buttons */}
         <div className="mt-12 flex flex-col md:flex-row w-full md:w-fit gap-3 md:gap-8">
             <Button className="px-12 py-2">Learn More</Button>
-            <Button variant="outline" className="px-12 border border-primary">Apply Now</Button>
+            <Button variant="outline" className="px-12 border border-primary" asChild><Link href='/apply'>Apply Now</Link></Button>
         </div>
       </div>
     </div>

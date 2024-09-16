@@ -27,15 +27,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+// } from "@/components/ui/popover";
+// import { cn } from "@/lib/utils";
+// import { Calendar } from "@/components/ui/calendar";
+// import { format } from "date-fns";
+// import { CalendarIcon } from "lucide-react";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -69,62 +69,66 @@ const steps = [
     id: "Step 3",
     name: "Additional Information",
     fields: [
-      "dob",
-      "maritialStatus",
-      "gender",
-      "passportNumber",
-      "anyDependent",
-      "relationShip",
+      "additionalInformation.dob",
+      "additionalInformation.maritialStatus",
+      "additionalInformation.gender",
+      "additionalInformation.passportNumber",
+      "additionalInformation.anyDependent",
+      "additionalInformation.relationShip",
     ],
   },
   {
     id: "Step 4",
     name: "Main Information",
     fields: [
-      "intake",
-      "capability",
-      "englishScore",
+      "satScore.math",
+      "satScore.english",
+      "toeflScore",
       "mathScore",
-      "preferredCountry",
-      "preferredMajor",
-      "toefl",
+      "ieltsScore",
+      "prefferedMajor.firstChoice",
+      "prefferedMajor.secondChoice",
+      "prefferedCountry.firstChoice",
+      "prefferedCountry.secondChoice",
     ],
   },
   {
     id: "Step 5",
     name: "Education",
     fields: [
-      "10thYearFinished",
-      "10thSchoolName",
-      "12thYearFinished",
-      "12thSchoolName",
-      "bachelorsYearFinished",
-      "bachelorsSchoolName",
-      "mastersYearFinished",
-      "mastersSchoolName",
+      "education.tenthGrade.schoolName",
+      "education.tenthGrade.year",
+      "education.twelvethGrade.schoolName",
+      "education.twelvethGrade.year",
+      "education.bachelors.schoolName",
+      "education.bachelors.year",
+      "education.masters.schoolName",
+      "education.masters.year",
     ],
   },
   {
     id: "Step 6",
     name: "Emergency Contact",
     fields: [
-      "emergencyContactName",
-      "emergencyContactEmail",
-      "emergencyContactAddress",
-      "emergencyContactRelationship",
-      "emergencyContactPhone",
+      "emergencyContact.name",
+      "emergencyContact.relation",
+      "emergencyContact.phoneNumber",
+      "emergencyContact.email",
+      "emergencyContact.address",
     ],
   },
   {
     id: "Step 7",
     name: "Previous Employment",
     fields: [
-      "PreviousCompanyName",
-      "PreviousCompanyAddress",
-      "PreviousCompanyJobTitle",
-      "PreviousCompanyResponsibilities",
-      "PreviousCompanySupervisor",
-      "PreviousCompanyPhone",
+      "previousCompany.companyName",
+      "previousCompany.jobTitle",
+      "previousCompany.address",
+      "previousCompany.startDate",
+      "previousCompany.endDate",
+      "previousCompany.responsibilities",
+      "previousCompany.supervisorName",
+      "previousCompany.phoneNumber",
     ],
   },
   { id: "Step 8", name: "Complete" },
@@ -142,7 +146,7 @@ export default function Page() {
   });
 
   const processForm: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    console.log("data from form", data);
     form.reset();
   };
 
@@ -159,6 +163,9 @@ export default function Page() {
     });
 
     if (!output) return;
+
+    console.log("Status", currentStep, steps.length - 1);
+    console.log();
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
@@ -591,7 +598,6 @@ export default function Page() {
                           <FormLabel>Gender</FormLabel>
                           <Select
                             onValueChange={field.onChange}
-                            defaultValue={field.value}
                             autoComplete="sex"
                           >
                             <FormControl>
@@ -719,7 +725,14 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Math</FormLabel>
-                          <Input type="number" id="math" {...field} />
+                          <Input
+                            {...field}
+                            type="number"
+                            id="satScore.math"
+                            onChange={(e) =>
+                              field.onChange(parseInt(e.target.value) || 0)
+                            }
+                          />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -733,7 +746,14 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>English</FormLabel>
-                          <Input type="number" id="english" {...field} />
+                          <Input
+                            {...field}
+                            type="number"
+                            id="english"
+                            onChange={(e) =>
+                              field.onChange(parseInt(e.target.value) || 0)
+                            }
+                          />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -752,7 +772,14 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>TOEFL Score</FormLabel>
-                          <Input type="number" id="toeflScore" {...field} />
+                          <Input
+                            {...field}
+                            type="number"
+                            id="toeflScore"
+                            onChange={(e) =>
+                              field.onChange(parseInt(e.target.value) || 0)
+                            }
+                          />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -766,7 +793,14 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>IELTS Score</FormLabel>
-                          <Input type="number" id="ieltsScore" {...field} />
+                          <Input
+                            {...field}
+                            type="number"
+                            id="ieltsScore"
+                            onChange={(e) =>
+                              field.onChange(parseInt(e.target.value) || 0)
+                            }
+                          />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -889,7 +923,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
-                          <Input type="number" id="year10th" {...field} />
+                          <Input type="text" id="year10th" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -922,7 +956,7 @@ export default function Page() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
-                          <Input type="number" id="year12th" {...field} />
+                          <Input type="text" id="year12th" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -1101,7 +1135,7 @@ export default function Page() {
                         <FormItem>
                           <FormLabel>Phone number</FormLabel>
                           <Input
-                            type="tel"
+                            type="text"
                             id="emergencyContactPhone"
                             {...field}
                           />
@@ -1220,7 +1254,6 @@ export default function Page() {
                     />
                   </div>
 
-                  
                   <div className="sm:col-span-2">
                     <FormField
                       control={form.control}
@@ -1239,7 +1272,6 @@ export default function Page() {
                     />
                   </div>
 
-                  
                   <div className="sm:col-span-2">
                     <FormField
                       control={form.control}
@@ -1248,18 +1280,17 @@ export default function Page() {
                         <FormItem>
                           <FormLabel>Start Date</FormLabel>
                           <Input
-                              {...field}
-                              type="date"
-                              value={field.value?.toString()}
-                              className="w-full flex justify-between"
-                            />
+                            {...field}
+                            type="date"
+                            value={field.value?.toString()}
+                            className="w-full flex justify-between"
+                          />
                           <FormMessage />
                         </FormItem>
                       )}
                     />
                   </div>
 
-                  
                   <div className="sm:col-span-2">
                     <FormField
                       control={form.control}
@@ -1268,11 +1299,11 @@ export default function Page() {
                         <FormItem>
                           <FormLabel>End Date</FormLabel>
                           <Input
-                              {...field}
-                              type="date"
-                              value={field.value?.toString()}
-                              className="w-full flex justify-between"
-                            />
+                            {...field}
+                            type="date"
+                            value={field.value?.toString()}
+                            className="w-full flex justify-between"
+                          />
                           <FormMessage />
                         </FormItem>
                       )}

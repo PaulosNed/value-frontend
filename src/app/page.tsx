@@ -5,11 +5,17 @@ import Pricing from "@/components/home/Pricing";
 import StatSection from "@/components/home/StatSection";
 import UniveristiesList from "@/components/home/UniveristiesList";
 import WhatWeDo from "@/components/home/WhatWeDo";
+import NavBar from "@/components/layout/NavBar";
 
 export default function Home() {
   return (
-    <main className="">
-      <div id="home" className="pt-10">
+    <main className="relative">
+      {/* Nav section */}
+      <div className="fixed inset-0 z-40 h-20 md:h-24">
+        <NavBar />
+      </div>
+
+      <div id="home" className="mt-32 md:mt-40 pt-10">
         <HeroSection />
       </div>
 
@@ -33,7 +39,10 @@ export default function Home() {
         <WhatWeDo />
       </div>
 
-      <div className="p-4 w-full md:w-9/12 md:mx-auto pt-12 md:pt-32" id="prices">
+      <div
+        className="p-4 w-full md:w-9/12 md:mx-auto pt-12 md:pt-32"
+        id="prices"
+      >
         <Pricing />
       </div>
 

@@ -23,15 +23,8 @@ export default function RootLayout({
     <SessionWrapper>
       <html lang="en">
         <StateProvider>
-          <body className={`relative ${inter.className}`}>
-            {/* Nav section */}
-            <div className="fixed inset-0 z-40 h-20 md:h-24">
-              <NavBar />
-            </div>
-
-            {/* Body */}
-            <div className="mt-32 md:mt-40">{children}</div>
-
+          <body className={`${inter.className}`}>
+            {children}
             <Toaster />
 
             {/* footer */}
