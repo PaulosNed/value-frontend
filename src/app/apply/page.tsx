@@ -121,14 +121,14 @@ const steps = [
     id: "Step 7",
     name: "Previous Employment",
     fields: [
-      "previousCompany.companyName",
-      "previousCompany.jobTitle",
-      "previousCompany.address",
-      "previousCompany.startDate",
-      "previousCompany.endDate",
-      "previousCompany.responsibilities",
-      "previousCompany.supervisorName",
-      "previousCompany.phoneNumber",
+      "previousEmployment.companyName",
+      "previousEmployment.jobTitle",
+      "previousEmployment.address",
+      "previousEmployment.startDate",
+      "previousEmployment.endDate",
+      "previousEmployment.responsibilities",
+      "previousEmployment.supervisorName",
+      "previousEmployment.phoneNumber",
     ],
   },
   { id: "Step 8", name: "Complete" },
@@ -146,6 +146,7 @@ export default function Page() {
   });
 
   const processForm: SubmitHandler<Inputs> = (data) => {
+    
     console.log("data from form", data);
     form.reset();
   };
@@ -158,14 +159,15 @@ export default function Page() {
 
   const next = async () => {
     const fields = steps[currentStep].fields;
+    console.log("fields", fields)
     const output = await form.trigger(fields as FieldName[], {
       shouldFocus: true,
     });
 
+    console.log("output", output)
     if (!output) return;
 
     console.log("Status", currentStep, steps.length - 1);
-    console.log();
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
