@@ -12,27 +12,23 @@ import NavLink from "./NavLink";
 import { AvatarMenu } from "../profile/AvatarMenu";
 import { useSession } from "next-auth/react";
 
-const NavBar = () => {
-  const navItems = [
+const AuthedNavBar = () => {
+  const authenticatedNavItems = [
     {
       name: "Home",
-      link: "#home",
+      link: "/",
     },
     {
-      name: "About",
-      link: "#about",
+      name: "Dashboard",
+      link: "/user/dashboard",
     },
     {
-      name: "Universities",
-      link: "#unis",
+      name: "Course",
+      link: "/user/course",
     },
     {
-      name: "Workflow",
-      link: "#workflow",
-    },
-    {
-      name: "Prices",
-      link: "#prices",
+      name: "Community",
+      link: "/user/community",
     },
   ];
 
@@ -57,27 +53,23 @@ const NavBar = () => {
           </div>
         </Link>
 
+        {/* authenticcated Navigation menu */}
         <NavigationMenuList>
           <div className="hidden md:flex">
-            {navItems.map((item, index) => (
+            {authenticatedNavItems.map((item, index) => (
               <NavLink key={index} name={item.name} link={item.link} />
             ))}
           </div>
         </NavigationMenuList>
-        {/* authenticcated Navigation menu */}
 
-        {/* Authentication buttons for non-authenticated */}
-        <div className="hidden md:flex w-2/12 space-x-4 justify-end">
-          <Button
-            asChild
-            className="px-6 border border-primary"
-            variant="outline"
-          >
-            <Link href={"/login"}>Log in</Link>
-          </Button>
-          <Button asChild className="px-6">
-            <Link href={"/signup"}>Sign up</Link>
-          </Button>
+        {/* Profiel details for those who are authenticated */}
+        <div className="hidden md:flex w-2/12 gap-5 justify-end items-center">
+          <img
+            src="/images/layout/notification.svg"
+            alt="notification bell"
+            className="w-6 h-6 object-cover"
+          />
+          <AvatarMenu />
         </div>
 
         {/* mobile burger */}
@@ -91,7 +83,7 @@ const NavBar = () => {
             {/* Navigation section */}
             {isMenuToggled && (
               <div className="flex flex-col w-44 py-5 pl-8 space-y-2 absolute top-10 right-0 bg-secondary shadow-lg">
-                {navItems.map((nav, idx) => (
+                {authenticatedNavItems.map((nav, idx) => (
                   <div key={nav.name} onClick={() => setIsMenuToggled(false)}>
                     <Link href={nav.link} className="text-primary">
                       {nav.name}
@@ -103,10 +95,10 @@ const NavBar = () => {
                 <hr className="-ml-6 mr-2" />
                 <div className="h-1"></div>
                 <Link href={"/login"} className="text-primary">
-                  Login
+                  Profile
                 </Link>
                 <Link href={"/signup"} className="text-primary">
-                  Signup
+                  Setting
                 </Link>
                 {/* <Button
                   asChild
@@ -126,4 +118,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default AuthedNavBar;

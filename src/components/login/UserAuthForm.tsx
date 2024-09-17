@@ -49,7 +49,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   
   useEffect(() => {
     if (sessionStatus === "authenticated") {
-      router.push("/");
+      router.push("/user/dashboard");
     }
   }, [sessionStatus, router]);
 

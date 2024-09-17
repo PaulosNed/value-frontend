@@ -1,4 +1,4 @@
-import NavBar from "@/components/layout/NavBar";
+import AuthedNavBar from "@/components/layout/AuthedNavBar";
 import React from "react";
 
 const Layout = ({
@@ -11,7 +11,7 @@ const Layout = ({
       
       {/* Nav section */}
       <div className="fixed inset-0 z-40 h-20 md:h-24">
-        <NavBar />
+        <AuthedNavBar />
       </div>
 
       {/* Body */}
