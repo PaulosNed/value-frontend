@@ -29,7 +29,7 @@ export const FormDataSchema = z.object({
     street2: z.string().optional(),
     city: z.string({ required_error: "City is required" }),
     state: z.string({ required_error: "State is required" }),
-    zip: z.string({ required_error: "Zip/postal Code is required" }),
+    zipCode: z.string({ required_error: "Zip/postal Code is required" }),
   }),
   additionalInformation: z.object({
     dob: z.string({
@@ -42,7 +42,7 @@ export const FormDataSchema = z.object({
       .string({ required_error: "Passport Number is required" })
       .regex(passportRegex, "Invalid Passport Number"),
     anyDependents: z.boolean({ required_error: "Dependents is required" }),
-    relationShip: z.string().optional(),
+    relationship: z.string().optional(),
   }),
   satScore: z.object({
     math: z
@@ -56,14 +56,19 @@ export const FormDataSchema = z.object({
       .min(200, "Invalid SAT Score")
       .max(800, "Invalid SAT Score"),
   }),
-  prefferedCountry: z.object({
-    firstChoice: z.string({ required_error: "First Choice is required" }),
-    secondChoice: z.string({ required_error: "Second Choice is required" }),
-  }),
-  prefferedMajor: z.object({
-    firstChoice: z.string({ required_error: "First Choice is required" }),
-    secondChoice: z.string({ required_error: "Second Choice is required" }),
-  }),
+  preferredCountryFirstChoice: z.string({ required_error: "First Choice Countr is required" }),
+  preferredCountrySecondChoice: z.string({ required_error: "Second Choice Country is required" }),
+  preferredMajorFirstChoice: z.string({ required_error: "First Choice Major is required" }),
+  preferredMajorSecondChoice: z.string({ required_error: "Second Choice Major is required" }),
+  
+  // preferredCountry: z.object({
+  //   firstChoice: z.string({ required_error: "First Choice is required" }),
+  //   secondChoice: z.string({ required_error: "Second Choice is required" }),
+  // }),
+  // preferredMajor: z.object({
+  //   firstChoice: z.string({ required_error: "First Choice is required" }),
+  //   secondChoice: z.string({ required_error: "Second Choice is required" }),
+  // }),
   toeflScore: z
     .number()
     .int()
@@ -75,26 +80,15 @@ export const FormDataSchema = z.object({
     .min(0, "Invalid IELTS Score")
     .max(9, "Invalid IELTS Score"),
   education: z.object({
-    tenthGrade: z.object({
-      schoolName: z.string({ required_error: "School Name is required" }),
-      year: z.string().regex(yearRegex, "Invalid Year"),
-      // grade: z.string().min(1, "Grade is required"),
-    }),
-    twelvethGrade: z.object({
-      schoolName: z.string({ required_error: "School Name is required" }),
-      year: z.string().regex(yearRegex, "Invalid Year"),
-      // grade: z.string().min(1, "Grade is required"),
-    }),
-    bachelors: z.object({
-      collegeName: z.string({ required_error: "College Name is required" }),
-      year: z.string().min(1).regex(yearRegex, "Invalid Year"),
-      // grade: z.string().min(1, "Grade is required"),
-    }),
-    masters: z.object({
-      collegeName: z.string({ required_error: "College Name is required" }),
-      year: z.string().min(1).regex(yearRegex, "Invalid Year"),
-      // grade: z.string().min(1, "Grade is required"),
-    }),
+    tenthGradeSchoolName: z.string({ required_error: "School Name is required" }),
+    tenthGradeYear: z.string().regex(yearRegex, "Invalid Year"),
+    twelvethGradeSchoolName: z.string({ required_error: "School Name is required" }),
+    twelvethGradeYear: z.string().regex(yearRegex, "Invalid Year"),
+    bachelorsCollegeName: z.string({ required_error: "College Name is required" }),
+    bachelorsYear: z.string().regex(yearRegex, "Invalid Year"),
+    mastersCollegeName: z.string({ required_error: "School Name is required" }),
+    mastersYear: z.string().regex(yearRegex, "Invalid Year"),
+    
   }),
   emergencyContact: z.object({
     name: z.string({ required_error: "Name is required" }),

@@ -62,7 +62,7 @@ const steps = [
       "address.city",
       "address.street",
       "address.street2",
-      "address.zip",
+      "address.zipCode",
     ],
   },
   {
@@ -74,7 +74,7 @@ const steps = [
       "additionalInformation.gender",
       "additionalInformation.passportNumber",
       "additionalInformation.anyDependent",
-      "additionalInformation.relationShip",
+      "additionalInformation.relationship",
     ],
   },
   {
@@ -86,24 +86,24 @@ const steps = [
       "toeflScore",
       "mathScore",
       "ieltsScore",
-      "prefferedMajor.firstChoice",
-      "prefferedMajor.secondChoice",
-      "prefferedCountry.firstChoice",
-      "prefferedCountry.secondChoice",
+      "preferredMajorFirstChoice",
+      "preferredMajorSecondChoice",
+      "preferredCountryFirstChoice",
+      "preferredCountrySecondChoice",
     ],
   },
   {
     id: "Step 5",
     name: "Education",
     fields: [
-      "education.tenthGrade.schoolName",
-      "education.tenthGrade.year",
-      "education.twelvethGrade.schoolName",
-      "education.twelvethGrade.year",
-      "education.bachelors.schoolName",
-      "education.bachelors.year",
-      "education.masters.schoolName",
-      "education.masters.year",
+      "education.tenthGradeSchoolName",
+      "education.tenthGradeYear",
+      "education.twelvethGradeSchoolName",
+      "education.twelvethGradeYear",
+      "education.bachelorsSchoolName",
+      "education.bachelorsYear",
+      "education.mastersSchoolName",
+      "education.mastersYear",
     ],
   },
   {
@@ -145,10 +145,19 @@ export default function Page() {
     resolver: zodResolver(FormDataSchema),
   });
 
-  const processForm: SubmitHandler<Inputs> = (data) => {
-    
+  const processForm: SubmitHandler<Inputs> = async (data) => {
     console.log("data from form", data);
-    form.reset();
+    setIsLoading(true);
+  
+    // Simulate form processing delay
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        setIsLoading(false);
+        resolve();  // Continue after 2 seconds
+      }, 2000);
+    });
+  
+    form.reset();  // Reset the form after the delay
   };
 
   type FieldName = keyof Inputs;
@@ -159,27 +168,31 @@ export default function Page() {
 
   const next = async () => {
     const fields = steps[currentStep].fields;
-    console.log("fields", fields)
+    console.log("fields", fields);
     const output = await form.trigger(fields as FieldName[], {
       shouldFocus: true,
     });
 
-    console.log("output", output)
+    console.log("output", output);
     if (!output) return;
 
     console.log("Status", currentStep, steps.length - 1);
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
-        await form.handleSubmit(processForm)();
+        await form.handleSubmit(processForm)();  // Wait for form submission to finish
+        setPreviousStep(currentStep);
+        setCurrentStep((step) => step + 1);  // Move to the next step after submission
+      } else {
+        setPreviousStep(currentStep);
+        setCurrentStep((step) => step + 1);  // Move to the next step immediately
       }
-      setPreviousStep(currentStep);
-      setCurrentStep((step) => step + 1);
     }
+    
   };
 
   const prev = () => {
-    if (currentStep > 0) {
+    if (currentStep > 0 && currentStep !== steps.length - 1) {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step - 1);
     }
@@ -463,13 +476,13 @@ export default function Page() {
                   <div className="sm:col-span-2">
                     <FormField
                       control={form.control}
-                      name="address.zip"
+                      name="address.zipCode"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>ZIP / Postal code</FormLabel>
                           <Input
                             type="text"
-                            id="zip"
+                            id="zipCode"
                             {...field}
                             autoComplete="postal-code"
                           />
@@ -679,11 +692,11 @@ export default function Page() {
                   <div className="md:col-span-full">
                     <FormField
                       control={form.control}
-                      name="additionalInformation.relationShip"
+                      name="additionalInformation.relationship"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            If Yes, What is your relationShip with the
+                            If Yes, What is your relationship with the
                             dependant?
                           </FormLabel>
                           <Input
@@ -811,14 +824,14 @@ export default function Page() {
 
                   <div className="col-span-1 self-end">
                     <h2 className="text-slate-500 md:py-3">
-                      <i>Preffered Country</i>
+                      <i>preferred Country</i>
                     </h2>
                   </div>
 
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="prefferedCountry.firstChoice"
+                      name="preferredCountryFirstChoice"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>First Choice</FormLabel>
@@ -832,7 +845,7 @@ export default function Page() {
                   <div className="col-span-3">
                     <FormField
                       control={form.control}
-                      name="prefferedCountry.secondChoice"
+                      name="preferredCountrySecondChoice"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Second Choice</FormLabel>
@@ -845,14 +858,14 @@ export default function Page() {
 
                   <div className="col-span-1 self-end">
                     <h2 className="text-slate-500 md:py-3">
-                      <i>Preffered Major</i>
+                      <i>preferred Major</i>
                     </h2>
                   </div>
 
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="prefferedMajor.firstChoice"
+                      name="preferredMajorFirstChoice"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>First Choice</FormLabel>
@@ -866,7 +879,7 @@ export default function Page() {
                   <div className="col-span-3">
                     <FormField
                       control={form.control}
-                      name="prefferedMajor.secondChoice"
+                      name="preferredMajorSecondChoice"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Second Choice</FormLabel>
@@ -907,7 +920,7 @@ export default function Page() {
                   <div className="col-span-3">
                     <FormField
                       control={form.control}
-                      name="education.tenthGrade.schoolName"
+                      name="education.tenthGradeSchoolName"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>School Name</FormLabel>
@@ -921,7 +934,7 @@ export default function Page() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="education.tenthGrade.year"
+                      name="education.tenthGradeYear"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
@@ -940,7 +953,7 @@ export default function Page() {
                   <div className="col-span-3">
                     <FormField
                       control={form.control}
-                      name="education.twelvethGrade.schoolName"
+                      name="education.twelvethGradeSchoolName"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>School Name</FormLabel>
@@ -954,7 +967,7 @@ export default function Page() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="education.twelvethGrade.year"
+                      name="education.twelvethGradeYear"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
@@ -974,7 +987,7 @@ export default function Page() {
                   <div className="col-span-3">
                     <FormField
                       control={form.control}
-                      name="education.bachelors.collegeName"
+                      name="education.bachelorsCollegeName"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>College Name</FormLabel>
@@ -992,7 +1005,7 @@ export default function Page() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="education.bachelors.year"
+                      name="education.bachelorsYear"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
@@ -1012,7 +1025,7 @@ export default function Page() {
                   <div className="col-span-3">
                     <FormField
                       control={form.control}
-                      name="education.masters.collegeName"
+                      name="education.mastersCollegeName"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>College Name</FormLabel>
@@ -1030,7 +1043,7 @@ export default function Page() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="education.masters.year"
+                      name="education.mastersYear"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Year</FormLabel>
@@ -1334,7 +1347,7 @@ export default function Page() {
             <Button
               variant="outline"
               onClick={prev}
-              disabled={currentStep === 0}
+              disabled={currentStep === 0 && currentStep == steps.length - 1}
             >
               Back
             </Button>
@@ -1343,10 +1356,12 @@ export default function Page() {
               //   disabled={currentStep === steps.length - 1}
               //   className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {currentStep == steps.length - 2
-                ? "Submit"
+              {isLoading
+                ? "Submitting..."
                 : currentStep == steps.length - 1
                 ? "Go to Home Page"
+                : currentStep == steps.length - 2
+                ? "Submit"
                 : "Next"}
             </Button>
           </div>
