@@ -28,6 +28,14 @@ export const userApi = createApi({
       }),
     }),
 
+    apply: builder.mutation<any, any>({
+      query: (data) => ({
+        url: `/users/apply/`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     signup: builder.mutation<any, any>({
       query: (data) => ({
         url: `/users/register/`,
@@ -40,5 +48,6 @@ export const userApi = createApi({
 
 export const {
     useLoginMutation,
+    useApplyMutation,
     useSignupMutation,
 } = userApi;

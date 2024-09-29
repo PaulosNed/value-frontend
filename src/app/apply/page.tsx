@@ -38,6 +38,7 @@ import {
 // import { CalendarIcon } from "lucide-react";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useApplyMutation } from "@/store/users/usersApi";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -141,6 +142,8 @@ export default function Page() {
   const router = useRouter();
   const delta = currentStep - previousStep;
 
+  const [apply, { data, isError, isSuccess }] = useApplyMutation();
+
   const form = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
   });
@@ -148,16 +151,26 @@ export default function Page() {
   const processForm: SubmitHandler<Inputs> = async (data) => {
     console.log("data from form", data);
     setIsLoading(true);
-  
+
+    const response: any =  await apply(data).unwrap();
+    
+    if (response.data && response.status === 201) {
+      console.log("Success", response.data);
+    } else {
+      console.log("Error found", response);
+    }
+    
+    
     // Simulate form processing delay
-    await new Promise<void>((resolve) => {
-      setTimeout(() => {
-        setIsLoading(false);
-        resolve();  // Continue after 2 seconds
-      }, 2000);
-    });
-  
-    form.reset();  // Reset the form after the delay
+    // await new Promise<void>((resolve) => {
+      //   setTimeout(() => {
+        //     setIsLoading(false);
+        //     resolve(); // Continue after 2 seconds
+        //   }, 2000);
+    // });
+    
+    form.reset(); // Reset the form after the delay
+    setIsLoading(false);
   };
 
   type FieldName = keyof Inputs;
@@ -180,15 +193,14 @@ export default function Page() {
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
-        await form.handleSubmit(processForm)();  // Wait for form submission to finish
+        await form.handleSubmit(processForm)(); // Wait for form submission to finish
         setPreviousStep(currentStep);
-        setCurrentStep((step) => step + 1);  // Move to the next step after submission
+        setCurrentStep((step) => step + 1); // Move to the next step after submission
       } else {
         setPreviousStep(currentStep);
-        setCurrentStep((step) => step + 1);  // Move to the next step immediately
+        setCurrentStep((step) => step + 1); // Move to the next step immediately
       }
     }
-    
   };
 
   const prev = () => {
