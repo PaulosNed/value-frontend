@@ -39,6 +39,7 @@ import {
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useApplyMutation } from "@/store/users/usersApi";
+import { useToast } from "@/components/ui/use-toast"
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -140,6 +141,7 @@ export default function Page() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { toast } = useToast()
   const delta = currentStep - previousStep;
 
   const [apply, { data, isError, isSuccess }] = useApplyMutation();
@@ -155,8 +157,17 @@ export default function Page() {
     const response: any =  await apply(data).unwrap();
     
     if (response.data && response.status === 201) {
-      console.log("Success", response.data);
+      toast({
+        variant: "default",
+        title: `Successfully Applied` ,
+        description: `you have successfully applied`,
+      })
     } else {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: `${response.error.personalInformation.email[0]}`,
+      })
       console.log("Error found", response);
     }
     
