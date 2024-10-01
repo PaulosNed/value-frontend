@@ -14,10 +14,10 @@ import { useSession } from "next-auth/react";
 
 const AuthedNavBar = () => {
   const authenticatedNavItems = [
-    {
-      name: "Home",
-      link: "/",
-    },
+    // {
+    //   name: "Home",
+    //   link: "/",
+    // },
     {
       name: "Dashboard",
       link: "/user/dashboard",
