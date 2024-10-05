@@ -58,7 +58,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     
     const response: any = await signIn("credentials", {
       redirect: false,
-      username: values.email,
+      email: values.email,
       password: values.password,
     })
     
