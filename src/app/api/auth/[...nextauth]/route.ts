@@ -86,7 +86,7 @@ const handler = NextAuth({
     //     },
     async jwt({ token, user, account }) {
       console.log("JWT callback:", { token, user, account });
-
+      
       // Only assign access and refresh tokens on the initial login (when user and account are defined)
       if (user && account) {
         token.accessToken = (user as any).access;
