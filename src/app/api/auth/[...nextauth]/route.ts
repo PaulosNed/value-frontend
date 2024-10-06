@@ -22,11 +22,11 @@ const handler = NextAuth({
         },
       },
       async authorize(credentials, req) {
-        console.log(
-          "Authorizing credentials:",
-          credentials,
-          process.env.NEXT_PUBLIC_ENDPOINT
-        );
+        // console.log(
+        //   "Authorizing credentials:",
+        //   credentials,
+        //   process.env.NEXT_PUBLIC_ENDPOINT
+        // );
         const res = await fetch(`${BACKEND_URL}/api/token/`, {
           method: "POST",
           body: JSON.stringify(credentials),
@@ -85,7 +85,7 @@ const handler = NextAuth({
     //       return false;
     //     },
     async jwt({ token, user, account }) {
-      console.log("JWT callback:", { token, user, account });
+      // console.log("JWT callback:", { token, user, account });
       
       // Only assign access and refresh tokens on the initial login (when user and account are defined)
       if (user && account) {
@@ -101,7 +101,7 @@ const handler = NextAuth({
     },
 
     async session({ session, token }) {
-      console.log("Session callback:", token);
+      // console.log("Session callback:", token);
       // Forward the accessToken to the session
       (session as any).accessToken = token.accessToken;
       (session as any).refreshToken = token.refreshToken;
