@@ -27,10 +27,18 @@ export const coursesApi = createApi({
       }),
     }),
 
+    getSingleCourses: builder.query<any, string>({
+      query: (id) => ({
+        url: `/courses/${id}`,
+        method: "GET",
+      }),
+    }),
+
     
   }),
 });
 
 export const {
     useGetAllCoursesQuery,
+    useGetSingleCoursesQuery,
 } = coursesApi;
