@@ -1,3 +1,5 @@
+"use client"
+
 import AboutSection from "@/components/home/AboutSection";
 import HeroSection from "@/components/home/HeroSection";
 import HowWeWork from "@/components/home/HowWeWork";
@@ -6,8 +8,21 @@ import StatSection from "@/components/home/StatSection";
 import UniveristiesList from "@/components/home/UniveristiesList";
 import WhatWeDo from "@/components/home/WhatWeDo";
 import NavBar from "@/components/layout/NavBar";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+
+  const { data: session, status: sessionStatus } = useSession();
+  const router = useRouter()
+  
+  useEffect(() => {
+    if (sessionStatus === "authenticated") {
+      router.push("/user/dashboard");
+    }
+  }, [sessionStatus, router]);
+  
   return (
     <main className="relative">
       {/* Nav section */}

@@ -1382,7 +1382,7 @@ export default function Page() {
               {isLoading
                 ? "Submitting..."
                 : currentStep == steps.length - 1
-                ? "Go to Home Page"
+                ? "Done"
                 : currentStep == steps.length - 2
                 ? "Submit"
                 : "Next"}

@@ -19,7 +19,7 @@ const WeekAccordion = ({ id, title, description, courses }: Week) => {
         <AccordionContent>
           <div className="md:px-2 pt-4 pb-6 flex flex-col gap-5">
             {courses.map((course: Course) => (
-              <Link href={`/user/course/${course.id}`} key={course.id} className="flex justify-between hover:cursor-pointer group">
+              <Link href={`/user/course/${course.id}`} key={course.id} className="flex justify-between hover:cursor-pointer hover:text-blue-700 group">
                 <div className="flex gap-2 items-center">
                   <MdDescription />
                   <p className="text-[15px] group-hover:underline">{course.title}</p>

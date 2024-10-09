@@ -9,20 +9,22 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
-
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Page = () => {
-  
-  const { data: response, isLoading, isFetching, isError, error, isSuccess } = useGetAllCoursesQuery();
+  const {
+    data: response,
+    isLoading,
+    isFetching,
+    isError,
+    error,
+    isSuccess,
+  } = useGetAllCoursesQuery();
 
   // console.log("weeks", weeks);
-  if (isLoading || isFetching) {
-    return <div>Loading...</div>;
-  }
-
-  else if (isError) {
+  if (isError) {
     {
-      console.log(error, status, isError);
+      console.log(error, isError);
       toast({
         variant: "destructive",
         title: "Unable to fetch Courses",
@@ -33,7 +35,6 @@ const Page = () => {
   }
 
   const weeks: Week[] = response?.data;
-
 
   return (
     <main>
@@ -106,6 +107,15 @@ const Page = () => {
           </h1>
         </div>
         <div className="mt-8">
+          {(isLoading || isFetching) && (
+            <div className="flex flex-col space-y-4 mt-3">
+              <Skeleton className="h-[80px]" />
+              <Skeleton className="h-[80px]" />
+              <Skeleton className="h-[80px]" />
+              <Skeleton className="h-[80px]" />
+              <Skeleton className="h-[80px]" />
+            </div>
+          )}
           {weeks?.length !== 0 &&
             weeks?.map((week: Week) => (
               <WeekAccordion
