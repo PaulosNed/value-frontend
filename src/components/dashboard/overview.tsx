@@ -4,53 +4,53 @@ import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
 const data = [
   {
-    name: "Jan",
-    total: Math.floor(Math.random() * 5000) + 1000,
+    name: "10/23",
+    total: 2,
   },
   {
-    name: "Feb",
-    total: Math.floor(Math.random() * 5000) + 1000,
+    name: "10/22",
+    total: 3,
   },
   {
-    name: "Mar",
-    total: Math.floor(Math.random() * 5000) + 1000,
+    name: "10/21",
+    total: 3,
   },
   {
-    name: "Apr",
-    total: Math.floor(Math.random() * 5000) + 1000,
+    name: "10/20",
+    total: 5,
   },
   {
-    name: "May",
-    total: Math.floor(Math.random() * 5000) + 1000,
+    name: "10/19",
+    total: 1,
   },
   {
-    name: "Jun",
-    total: Math.floor(Math.random() * 5000) + 1000,
+    name: "10/18",
+    total: 1,
   },
-  {
-    name: "Jul",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Aug",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Sep",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Oct",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Nov",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Dec",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
+  // {
+  //   name: "Jul",
+  //   total: Math.floor(Math.random() * 5000) + 1000,
+  // },
+  // {
+  //   name: "Aug",
+  //   total: Math.floor(Math.random() * 5000) + 1000,
+  // },
+  // {
+  //   name: "Sep",
+  //   total: Math.floor(Math.random() * 5000) + 1000,
+  // },
+  // {
+  //   name: "Oct",
+  //   total: Math.floor(Math.random() * 5000) + 1000,
+  // },
+  // {
+  //   name: "Nov",
+  //   total: Math.floor(Math.random() * 5000) + 1000,
+  // },
+  // {
+  //   name: "Dec",
+  //   total: Math.floor(Math.random() * 5000) + 1000,
+  // },
 ]
 
 export function Overview() {
@@ -69,7 +69,7 @@ export function Overview() {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `$${value}`}
+          tickFormatter={(value) => `${value}`}
         />
         <Bar
           dataKey="total"

@@ -1,5 +1,6 @@
 "use client"
 
+import WeekAccordion from "@/components/course/WeekAccordion";
 import { toast } from "@/components/ui/use-toast";
 import { Week } from "@/Models/Week";
 import { useGetAllCoursesQuery } from "@/store/courses/coursesApi";
@@ -36,14 +37,24 @@ const Layout = ({
 
   return (
     <div className="flex">
-      {/* Body */}
-      <div className="w-9/12">{children}</div>
-
       {/* Nav section */}
-      <div className="top-0 right-0 z-40 w-3/12 h-40 bg-black">
+      <div className="z-10 w-4/12 px-10 bg-gray-50 rounded-r-md">
         {/* Add side nav */}
-        {/* <AuthedNavBar /> */}
+        {weeks?.length !== 0 &&
+            weeks?.map((week: Week) => (
+              <WeekAccordion
+                key={week.id}
+                id={week.id}
+                title={week.title}
+                description={week.description}
+                courses={week.courses}
+              />
+            ))}
       </div>
+
+      {/* Body */}
+      <div className="w-8/12">{children}</div>
+
     </div>
   );
 };

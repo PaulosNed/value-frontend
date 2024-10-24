@@ -1,0 +1,43 @@
+/* RichTextStyles.module.css */
+
+/* Styles for the rich text container */
+.richTextContent h1 {
+    @apply text-4xl font-bold mb-4 text-gray-900;
+  }
+  
+  .richTextContent h2 {
+    @apply text-3xl font-semibold mb-3 text-gray-800;
+  }
+  
+  .richTextContent h3 {
+    @apply text-2xl font-medium mb-2 text-gray-700;
+  }
+  
+  .richTextContent h4 {
+    @apply text-xl font-medium mb-2 text-gray-600;
+  }
+  
+  .richTextContent p {
+    @apply text-base mb-4 leading-relaxed text-gray-900;
+  }
+  
+  .richTextContent ul {
+    @apply list-disc pl-5 mb-4;
+  }
+  
+  .richTextContent ol {
+    @apply list-decimal pl-5 mb-4;
+  }
+  
+  .richTextContent li {
+    @apply mb-2 text-gray-900;
+  }
+  
+  .richTextContent strong {
+    @apply font-semibold;
+  }
+  
+  .richTextContent span {
+    @apply text-gray-900;
+  }
+  

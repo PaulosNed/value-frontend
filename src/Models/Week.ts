@@ -5,4 +5,5 @@ export type Week = {
     title: string;
     description: string;
     courses: Course[];
+    currCourseId?: string;
 }

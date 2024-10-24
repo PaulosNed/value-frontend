@@ -11,11 +11,11 @@ import { MdDescription } from 'react-icons/md';
 
 
 
-const WeekAccordion = ({ id, title, description, courses }: Week) => {
+const WeekAccordion = ({ id, title, description, courses, currCourseId }: Week) => {
   return (
     <Accordion type="single" collapsible className="w-full">
-      <AccordionItem value="item-1" className="py-4">
-        <AccordionTrigger className="text-xl text-primary">{title}</AccordionTrigger>
+      <AccordionItem value="item-1" className="py-4 text-start">
+        <AccordionTrigger className="text-xl text-primary ">{title}</AccordionTrigger>
         <AccordionContent>
           <div className="md:px-2 pt-4 pb-6 flex flex-col gap-5">
             {courses.map((course: Course) => (
