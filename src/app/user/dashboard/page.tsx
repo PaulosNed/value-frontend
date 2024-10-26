@@ -1,12 +1,14 @@
+"use client";
+
 import { Metadata } from "next";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 
-import { FaCheckCircle } from 'react-icons/fa';
-import { FaHourglassHalf } from 'react-icons/fa';
-import { AiFillPlayCircle } from 'react-icons/ai';
-import { FaDotCircle } from 'react-icons/fa';
+import { FaCheckCircle } from "react-icons/fa";
+import { FaHourglassHalf } from "react-icons/fa";
+import { AiFillPlayCircle } from "react-icons/ai";
+import { FaDotCircle } from "react-icons/fa";
 
 import {
   Card,
@@ -18,13 +20,43 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Overview } from "@/components/dashboard/overview";
 import { RecentSales } from "@/components/dashboard/recent-sales";
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
-};
+import { useGetDashboardDataQuery } from "@/store/dashboard/dashboardApi";
+import { toast } from "@/components/ui/use-toast";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function DashboardPage() {
+  const {
+    data: response,
+    isLoading,
+    isFetching,
+    isError,
+    error,
+    isSuccess,
+  } = useGetDashboardDataQuery();
+
+  if (isLoading || isFetching) {
+    return <div className="flex justify-between gap-5 mt-3">
+    <Skeleton className="h-[200px]" />
+    <Skeleton className="h-[200px]" />
+    <Skeleton className="h-[200px]" />
+    <Skeleton className="h-[200px]" />
+  </div>
+  }
+
+  if (isError) {
+    {
+      console.log(error, isError);
+      toast({
+        variant: "destructive",
+        title: "Unable to fetch Courses",
+        description: (error as any)?.data?.detail,
+      });
+    }
+    return <div>Error</div>;
+  }
+
+  const dashboardData = response?.data;
+
   return (
     <>
       <div className="md:hidden">
@@ -82,24 +114,14 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Weeks Completed
                     </CardTitle>
-                    <FaCheckCircle className="text-slate-500" size={22}/>
-                    {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                    </svg> */}
+                    <FaCheckCircle className="text-slate-500" size={22} />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">2 Weeks</div>
+                    <div className="text-2xl font-bold">{`${dashboardData.weeks_completed} Weeks`}</div>
                     <p className="text-xs text-muted-foreground">
-                      you have completed 50% of the course
+                      {`you have completed ${
+                        (dashboardData.weeks_completed / 4) * 100
+                      }% of the course`}
                     </p>
                   </CardContent>
                 </Card>
@@ -108,26 +130,12 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Weeks Remaining
                     </CardTitle>
-                    <FaHourglassHalf className="text-slate-500" size={20}/>
-                    {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg> */}
+                    <FaHourglassHalf className="text-slate-500" size={20} />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">2 Weeks</div>
+                    <div className="text-2xl font-bold">{`${dashboardData.weeks_remaining} Weeks`}</div>
                     <p className="text-xs text-muted-foreground">
-                      50% of the course has not been covered yet
+                      {`${(dashboardData.weeks_remaining / 4) * 100}% of the course has not been covered yet`}
                     </p>
                   </CardContent>
                 </Card>
@@ -136,7 +144,7 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Current Week
                     </CardTitle>
-                    <FaDotCircle className="text-slate-500" size={22}/>
+                    <FaDotCircle className="text-slate-500" size={22} />
                     {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -152,9 +160,9 @@ export default function DashboardPage() {
                     </svg> */}
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">Week 3</div>
+                    <div className="text-2xl font-bold">{`Week ${dashboardData.current_week.count}`}</div>
                     <p className="text-xs text-muted-foreground">
-                      Navigating the Application Process
+                      {dashboardData.current_week.title}
                     </p>
                   </CardContent>
                 </Card>
@@ -163,26 +171,14 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Current Course
                     </CardTitle>
-                    <AiFillPlayCircle className="text-slate-500" size={24}/>
-                    {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                    </svg> */}
+                    <AiFillPlayCircle className="text-slate-500" size={24} />
                   </CardHeader>
                   <CardContent>
                     <div className="text-xl font-bold">
-                      Understanding Scholarships
+                      {dashboardData.current_course.title}
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      from WEEK 3: Navigating the Application Process
+                      {`Course number ${dashboardData.current_course.count} from ${dashboardData.current_week.title}`}
                     </p>
                   </CardContent>
                 </Card>
@@ -200,7 +196,7 @@ export default function DashboardPage() {
                   <CardHeader>
                     <CardTitle>Recent Courses</CardTitle>
                     <CardDescription>
-                      So far you have completed 12 Courses
+                      Here are the courses you have recently completed
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
