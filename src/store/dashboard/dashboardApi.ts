@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getSession } from "next-auth/react";
 
-
 const BASE_URL = process.env.NEXT_PUBLIC_ENDPOINT;
 
 export const dashboardApi = createApi({
@@ -11,8 +10,8 @@ export const dashboardApi = createApi({
     prepareHeaders: async (headers, { getState }) => {
       const session = await getSession();
       if (session) {
-       const token = (session as any).accessToken as string; 
-       headers.set("Authorization", `Bearer ${token}`);
+        const token = (session as any).accessToken as string;
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },
@@ -26,10 +25,14 @@ export const dashboardApi = createApi({
       }),
     }),
 
-    
+    setDashboardData: builder.mutation<any, any>({
+      query: (data) => ({
+        url: `/dashboard/update/`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const {
-    useGetDashboardDataQuery,
-} = dashboardApi;
+export const { useGetDashboardDataQuery, useSetDashboardDataMutation } = dashboardApi;

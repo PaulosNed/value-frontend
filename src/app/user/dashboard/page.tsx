@@ -23,6 +23,7 @@ import { RecentSales } from "@/components/dashboard/recent-sales";
 import { useGetDashboardDataQuery } from "@/store/dashboard/dashboardApi";
 import { toast } from "@/components/ui/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Course } from "@/Models/Course";
 
 export default function DashboardPage() {
   const {
@@ -35,12 +36,16 @@ export default function DashboardPage() {
   } = useGetDashboardDataQuery();
 
   if (isLoading || isFetching) {
-    return <div className="flex justify-between gap-5 mt-3">
-    <Skeleton className="h-[200px]" />
-    <Skeleton className="h-[200px]" />
-    <Skeleton className="h-[200px]" />
-    <Skeleton className="h-[200px]" />
-  </div>
+    return (
+      <div className="grid grid-cols-12 gap-5 px-10 md:mt-32">
+        <Skeleton className="col-span-3 h-[200px]" />
+        <Skeleton className="col-span-3 h-[200px]" />
+        <Skeleton className="col-span-3 h-[200px]" />
+        <Skeleton className="col-span-3 h-[200px]" />
+        <Skeleton className="col-span-7 h-[500px]" />
+        <Skeleton className="col-span-5 h-[500px]" />
+      </div>
+    );
   }
 
   if (isError) {
@@ -56,6 +61,8 @@ export default function DashboardPage() {
   }
 
   const dashboardData = response?.data;
+  const chartData = response?.chart_data;
+  const recentCourses: Course[] = response?.recent_courses;
 
   return (
     <>
@@ -135,7 +142,9 @@ export default function DashboardPage() {
                   <CardContent>
                     <div className="text-2xl font-bold">{`${dashboardData.weeks_remaining} Weeks`}</div>
                     <p className="text-xs text-muted-foreground">
-                      {`${(dashboardData.weeks_remaining / 4) * 100}% of the course has not been covered yet`}
+                      {`${
+                        (dashboardData.weeks_remaining / 4) * 100
+                      }% of the course has not been covered yet`}
                     </p>
                   </CardContent>
                 </Card>
@@ -145,19 +154,6 @@ export default function DashboardPage() {
                       Current Week
                     </CardTitle>
                     <FaDotCircle className="text-slate-500" size={22} />
-                    {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <rect width="20" height="14" x="2" y="5" rx="2" />
-                      <path d="M2 10h20" />
-                    </svg> */}
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{`Week ${dashboardData.current_week.count}`}</div>
@@ -189,7 +185,7 @@ export default function DashboardPage() {
                     <CardTitle>Consistency Tracker</CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2">
-                    <Overview />
+                    <Overview data={chartData} />
                   </CardContent>
                 </Card>
                 <Card className="col-span-3">
@@ -200,7 +196,7 @@ export default function DashboardPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <RecentSales />
+                    <RecentSales courses={recentCourses} />
                   </CardContent>
                 </Card>
               </div>
