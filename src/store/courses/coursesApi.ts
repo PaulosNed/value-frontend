@@ -34,6 +34,13 @@ export const coursesApi = createApi({
       }),
     }),
 
+    getQuiz: builder.query<any, string>({
+      query: (id) => ({
+        url: `/courses/quiz/${id}`,
+        method: "GET",
+      }),
+    }),
+
     
   }),
 });
@@ -41,4 +48,5 @@ export const coursesApi = createApi({
 export const {
     useGetAllCoursesQuery,
     useGetSingleCoursesQuery,
+    useGetQuizQuery,
 } = coursesApi;

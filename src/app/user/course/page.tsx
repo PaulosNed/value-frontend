@@ -121,6 +121,7 @@ const Page = () => {
               <WeekAccordion
                 key={week.id}
                 id={week.id}
+                count={week.count}
                 title={week.title}
                 description={week.description}
                 courses={week.courses}

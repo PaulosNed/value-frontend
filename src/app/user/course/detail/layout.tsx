@@ -34,6 +34,7 @@ const Layout = ({
   }
 
   const weeks: Week[] = response?.data;
+  console.log("in layou", weeks)
 
   return (
     <div className="flex">
@@ -45,6 +46,7 @@ const Layout = ({
               <WeekAccordion
                 key={week.id}
                 id={week.id}
+                count={week.count}
                 title={week.title}
                 description={week.description}
                 courses={week.courses}
