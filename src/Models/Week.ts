@@ -7,4 +7,5 @@ export type Week = {
     description: string;
     courses: Course[];
     currCourseId?: string;
+    pageOrder: string[];
 }

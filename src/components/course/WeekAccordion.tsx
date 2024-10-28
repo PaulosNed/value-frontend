@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -6,8 +8,11 @@ import {
 } from "@/components/ui/accordion";
 import { Course } from "@/Models/Course";
 import { Week } from "@/Models/Week";
+import { setCurrentPage } from "@/store/navigation/navigationSlice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { MdDescription } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 
 const WeekAccordion = ({
   id,
@@ -16,22 +21,39 @@ const WeekAccordion = ({
   description,
   courses,
   currCourseId,
+  pageOrder,
 }: Week) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const currentPage = useSelector((state: any) => state.navigation.currentPage);
 
-  console.log("in week accordion", id)
+  console.log("in week accordion", id);
+  const navigateToCourse = (url: string): void => {
+    const updatedIdx = pageOrder.indexOf(url);
+    dispatch(setCurrentPage(updatedIdx));
+    router.push(url);
+  };
+
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1" className="py-4 text-start">
         <AccordionTrigger className="text-xl text-primary ">
-          {title}
+          Week {count}: {title}
         </AccordionTrigger>
         <AccordionContent>
           <div className="md:px-2 pt-4 pb-6 flex flex-col gap-5">
             {courses.map((course: Course) => (
-              <Link
-                href={`/user/course/detail/${course.id}`}
+              <div
+                onClick={(e) =>
+                  navigateToCourse(`/user/course/detail/${course.id}`)
+                }
                 key={course.id}
-                className="flex justify-between hover:cursor-pointer hover:text-blue-700 group"
+                className={`flex justify-between hover:cursor-pointer hover:text-blue-700 group ${
+                  pageOrder.indexOf(`/user/course/detail/${course.id}`) ===
+                  currentPage
+                    ? "text-blue-700 underline font-semibold"
+                    : ""
+                }`}
               >
                 <div className="flex gap-2 items-center">
                   <MdDescription />
@@ -40,13 +62,20 @@ const WeekAccordion = ({
                   </p>
                 </div>
                 <p className="text-[15px]">{course.duration} mins</p>
-              </Link>
+              </div>
             ))}
 
             {/* Current week's quiz */}
-            <Link
-              href={`/user/course/detail/quiz/${id}`}
-              className="flex justify-between hover:cursor-pointer hover:text-blue-700 group"
+            <div
+              onClick={(e) =>
+                navigateToCourse(`/user/course/detail/quiz/${id}`)
+              }
+              className={`flex justify-between hover:cursor-pointer hover:text-blue-700 group ${
+                pageOrder.indexOf(`/user/course/detail/quiz/${id}`) ===
+                currentPage
+                  ? "text-blue-700 underline font-semibold"
+                  : ""
+              }`}
             >
               <div className="flex gap-2 items-center">
                 <MdDescription />
@@ -55,7 +84,28 @@ const WeekAccordion = ({
                 </p>
               </div>
               <p className="text-[15px]"></p>
-            </Link>
+            </div>
+
+            {/* Current week's activity */}
+            <div
+              onClick={(e) =>
+                navigateToCourse(`/user/course/detail/activity/${id}`)
+              }
+              className={`flex justify-between hover:cursor-pointer hover:text-blue-700 group ${
+                pageOrder.indexOf(`/user/course/detail/activity/${id}`) ===
+                currentPage
+                  ? "text-blue-700 underline font-semibold"
+                  : ""
+              }`}
+            >
+              <div className="flex gap-2 items-center">
+                <MdDescription />
+                <p className="text-[15px] group-hover:underline">
+                  Week {count} Activity
+                </p>
+              </div>
+              <p className="text-[15px]"></p>
+            </div>
           </div>
         </AccordionContent>
       </AccordionItem>

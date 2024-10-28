@@ -1,15 +1,17 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import WeekAccordion from "@/components/course/WeekAccordion";
 import { toast } from "@/components/ui/use-toast";
 import { Week } from "@/Models/Week";
 import { useGetAllCoursesQuery } from "@/store/courses/coursesApi";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { FaStar } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Course } from "@/Models/Course";
 
 const Page = () => {
   const {
@@ -35,6 +37,22 @@ const Page = () => {
   }
 
   const weeks: Week[] = response?.data;
+  const [pageOrder, setPageOrder] = useState<string[]>([]);
+  
+  useEffect(() => {
+    let order: string[] = [];
+    weeks?.map((week: Week) => {
+      const courses: Course[] = week.courses;
+      courses?.map((course: Course) => {
+        order.push(`/user/course/detail/${course.id}`);
+      });
+      order.push(`/user/course/detail/quiz/${week.id}`);
+      order.push(`/user/course/detail/activity/${week.id}`);
+    });
+    console.log("order from useEffect", order);
+    setPageOrder(order);
+  }, [weeks]);
+
 
   return (
     <main>
@@ -125,6 +143,7 @@ const Page = () => {
                 title={week.title}
                 description={week.description}
                 courses={week.courses}
+                pageOrder={pageOrder}
               />
             ))}
         </div>

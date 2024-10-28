@@ -140,12 +140,12 @@ const QuizPage: React.FC = () => {
       {submitted && (
         <div className="mt-4">
           <p className="text-lg font-semibold text-primary">
-            You scored {score} out of {questions.length}. please click the
-            "Next" button to continue to this week's activity
+            {`You scored ${score} out of ${questions.length}. please click the
+            "Next" button to continue to this week's activity`}
           </p>
         </div>
       )}
-      <div className="h-4"></div>
+      {/* <div className="h-4"></div>
       <div className="flex justify-between">
         <Button
           variant="outline"
@@ -170,7 +170,7 @@ const QuizPage: React.FC = () => {
             Next
           </Link>
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

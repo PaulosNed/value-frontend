@@ -67,7 +67,7 @@ const Page = () => {
         {!isLoading && !isFetching && (
           <>
             {parse(course.description)}
-            <div className="h-4"></div>
+            {/* <div className="h-4"></div>
             <div className="flex justify-between">
               <Button
                 variant="outline"
@@ -86,7 +86,7 @@ const Page = () => {
               >
                 <Link href={`/user/course/detail/${course?.id + 1}`}>Next</Link>
               </Button>
-            </div>
+            </div> */}
           </>
         )}
       </div>
