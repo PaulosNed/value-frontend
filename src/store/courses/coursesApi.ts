@@ -42,6 +42,12 @@ export const coursesApi = createApi({
     }),
 
     
+    getActivity: builder.query<any, string>({
+      query: (id) => ({
+        url: `/courses/activity/${id}`,
+        method: "GET",
+      }),
+    }),    
   }),
 });
 
@@ -49,4 +55,5 @@ export const {
     useGetAllCoursesQuery,
     useGetSingleCoursesQuery,
     useGetQuizQuery,
+    useGetActivityQuery,
 } = coursesApi;
