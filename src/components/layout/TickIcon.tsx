@@ -1,12 +1,13 @@
 import React from "react";
 
-interface TickIconProps {
-    color: string;
+interface TickIconProps extends React.SVGProps<SVGSVGElement> {
+  color: string;
 }
 
-const TickIcon = ({color}: TickIconProps) => {
+const TickIcon = ({ color, ...props }: TickIconProps) => {
   return (
     <svg
+      {...props}
       width="16"
       height="16"
       viewBox="0 0 30 30"

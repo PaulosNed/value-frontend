@@ -30,9 +30,9 @@ const AboutSection = () => {
         <div className="w-full md:w-1/2 md:flex md:justify-end">
           <div className="px-2 md:px-10 grid grid-cols-2 gap-x-8 md:gap-x-12 gap-y-6">
             <CheckListItem text={"Grade"} color={"#85B6FF"} />
-            <CheckListItem text={"Achievements"} color={"#00FFC2"} />
+            <CheckListItem text={"Test Scores"} color={"#00FFC2"} />
             <CheckListItem text={"Essays"} color={"#0074FD"} />
-            <CheckListItem text={"Finance"} color={"#FFB0A5"} />
+            <CheckListItem text={"Extracurricular Activities"} color={"#FFB0A5"} />
           </div>
         </div>
       </div>
@@ -53,11 +53,11 @@ const AboutSection = () => {
               is probably very smart, let’s help you differentiate yourself with
               your personality and unique skills.
             </p>
-            <div className="px-2 grid grid-cols-2 justify-items-start gap-x-8 md:gap-x-12 gap-y-6">
+            <div className="px-2 w-full grid grid-cols-2 place-items-stretch gap-x-8 md:gap-x-12 gap-y-6">
               <CheckListItem text={"Art & Music"} color={"#85B6FF"} />
               <CheckListItem text={"Sports"} color={"#00FFC2"} />
               <CheckListItem text={"Unique Skills"} color={"#0074FD"} />
-              <CheckListItem text={"History"} color={"#FFB0A5"} />
+              <CheckListItem text={"Achievements"} color={"#FFB0A5"} />
             </div>
           </div>
         </div>

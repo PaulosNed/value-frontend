@@ -18,7 +18,7 @@ const StatSection = () => {
   const stats: Stat[] = [
     {
       icon: "/images/home/studentsAdmitted.svg",
-      number: "500+",
+      number: "400+",
       title: "Students Admitted",
     },
     {

@@ -53,7 +53,7 @@ export default function DashboardPage() {
       console.log(error, isError);
       toast({
         variant: "destructive",
-        title: "Unable to fetch Courses",
+        title: "Unable to fetch Dashboard",
         description: (error as any)?.data?.detail,
       });
     }

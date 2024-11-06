@@ -25,8 +25,8 @@ const CardItems = () => {
       icon: "/images/home/share.svg",
     },
     {
-      title: "Testing",
-      description: "Prep for all your exams.",
+      title: "Activities",
+      description: "Boost your application.",
       icon: "/images/home/share.svg",
     },
   ];

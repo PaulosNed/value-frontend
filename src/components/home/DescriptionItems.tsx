@@ -6,15 +6,15 @@ const DescriptionItems = () => {
   const DescriptionItems: DescriptionItems[] = [
     {
       description:
-        "Schedule a consultation with our Enrollment Team. During the consultation, we’ll learn more about your academic journey, and what help you need along the way.",
+        "Complete your application by sending us your academic achievements, important documents, and financial information. This helps us assess your eligibility and determine how best we can assist you on your journey to college success.",
     },
     {
       description:
-        "We’ll match you to accomplished counselors that are the best fit for you based on your goals.",
+        "We’ll match you with a dedicated counselor and provide you access to our digital course, which serves as a guide to help you complete your application. However, the true value comes from listening to your counselor’s personalized advice.",
     },
     {
       description:
-        "Once we help you create the perfect path and provide you with everything you need its up to you to take a giant leap toward admission success!",
+        "We’ll help you make informed decisions on choosing your final university. Additionally, we’ll guide you through the steps needed to book a visa appointment and plan your trip, ensuring a smooth transition to your new academic journey abroad.",
     },
   ];
 
@@ -49,7 +49,7 @@ const DescriptionItems = () => {
           (descriptionItem: DescriptionItems, index: number) => (
             <div
               key={index}
-              className={`relative bg-white bg-opacity-100 z-20 w-[471px] h-[150px] flex gap-4 shadow-custom-blue p-10 rounded-none ${
+              className={`relative bg-white bg-opacity-100 z-20 w-[471px] h-[180px] flex gap-4 shadow-custom-blue p-10 rounded-none ${
                 index === 1 ? "md:ml-20" : ""
               }`}
             >
