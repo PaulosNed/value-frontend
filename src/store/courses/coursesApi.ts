@@ -48,6 +48,14 @@ export const coursesApi = createApi({
         method: "GET",
       }),
     }),    
+
+    submitActivity: builder.mutation<any, { id: string, data: FormData }>({
+      query: ({ id, data }) => ({
+        url: `/courses/activity/${id}/submit/`,
+        method: "POST",
+        body: data,
+      }),
+    })
   }),
 });
 
@@ -56,4 +64,5 @@ export const {
     useGetSingleCoursesQuery,
     useGetQuizQuery,
     useGetActivityQuery,
+    useSubmitActivityMutation,
 } = coursesApi;

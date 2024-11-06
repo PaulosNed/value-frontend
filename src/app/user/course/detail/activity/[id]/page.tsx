@@ -3,7 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/use-toast";
-import { useGetActivityQuery } from "@/store/courses/coursesApi";
+import {
+  useGetActivityQuery,
+  useSubmitActivityMutation,
+} from "@/store/courses/coursesApi";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
@@ -19,6 +22,17 @@ const ActivityPage: React.FC = () => {
   const { data, isLoading, isFetching, isError, error, isSuccess } =
     useGetActivityQuery(id);
 
+  const [
+    submitActivity,
+    {
+      data: submissionResponse,
+      isLoading: submitting,
+      isError: submissionError,
+      isSuccess: submittedSuccessfully,
+      error: submissionErrorData,
+    },
+  ] = useSubmitActivityMutation();
+
   const [submitted, setSubmitted] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
@@ -26,7 +40,7 @@ const ActivityPage: React.FC = () => {
     setSelectedFiles(event.target.files);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
       toast({
         variant: "destructive",
@@ -38,6 +52,28 @@ const ActivityPage: React.FC = () => {
 
     // Send API request to backend here
     console.log(selectedFiles);
+
+    const formData = new FormData();
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      formData.append("files", selectedFiles[i]);
+    }
+
+    const response = await submitActivity({
+      id: id,
+      data: formData,
+    });
+
+    console.log("RESPONSE FOR SUBMISSION", response, submissionError, submissionErrorData);
+
+    if (response?.error) {
+      toast({
+        variant: "destructive",
+        title: "Unable to submit activity",
+        description: "File submission was not successful",
+      });
+      return;
+    }
 
     toast({
       variant: "default",
@@ -100,7 +136,7 @@ const ActivityPage: React.FC = () => {
               disabled={submitted}
               className="text-center mt-10 md:w-44 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit Activity
+              {submitting ? "Submitting..." : "Submit Activity"}
             </Button>
           </div>
         </div>
