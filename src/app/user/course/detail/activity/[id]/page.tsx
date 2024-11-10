@@ -105,7 +105,7 @@ const ActivityPage: React.FC = () => {
   //   };
 
   return (
-    <div className="w-full m-4 border px-20 flex flex-col py-8 gap-8">
+    <div className="w-10/12 mx-auto border px-20 flex flex-col py-8 gap-8">
       {isLoading && (
         <div className="flex flex-col gap-4">
           <Skeleton className="h-[50px]" />
@@ -114,7 +114,7 @@ const ActivityPage: React.FC = () => {
       )}
       {!isLoading && !isFetching && (
         <div>
-          <h1 className="text-center text-3xl font-bold mb-4">
+          <h1 className="text-3xl font-semibold mb-6">
             Week {activity.week} Activity
           </h1>
           <h1 className="mb-8">{activity.description}</h1>

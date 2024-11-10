@@ -57,11 +57,11 @@ const WeekAccordion = ({
               >
                 <div className="flex gap-2 items-center">
                   <MdDescription />
-                  <p className="text-[15px] group-hover:underline">
+                  <p className="text-md group-hover:underline">
                     {course.title}
                   </p>
                 </div>
-                <p className="text-[15px]">{course.duration} mins</p>
+                <p className="text-md">{course.duration} mins</p>
               </div>
             ))}
 
@@ -79,11 +79,11 @@ const WeekAccordion = ({
             >
               <div className="flex gap-2 items-center">
                 <MdDescription />
-                <p className="text-[15px] group-hover:underline">
+                <p className="text-md group-hover:underline">
                   Week {count} Quiz
                 </p>
               </div>
-              <p className="text-[15px]"></p>
+              <p className="text-md"></p>
             </div>
 
             {/* Current week's activity */}
@@ -100,11 +100,11 @@ const WeekAccordion = ({
             >
               <div className="flex gap-2 items-center">
                 <MdDescription />
-                <p className="text-[15px] group-hover:underline">
+                <p className="text-md group-hover:underline">
                   Week {count} Activity
                 </p>
               </div>
-              <p className="text-[15px]"></p>
+              <p className="text-md"></p>
             </div>
           </div>
         </AccordionContent>

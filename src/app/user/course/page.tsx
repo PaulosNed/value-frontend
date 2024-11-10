@@ -38,7 +38,7 @@ const Page = () => {
 
   const weeks: Week[] = response?.data;
   const [pageOrder, setPageOrder] = useState<string[]>([]);
-  
+
   useEffect(() => {
     let order: string[] = [];
     weeks?.map((week: Week) => {
@@ -53,12 +53,11 @@ const Page = () => {
     setPageOrder(order);
   }, [weeks]);
 
-
   return (
     <main>
       <div className="md:w-9/12 md:mx-auto px-10">
         <h1 className="text-3xl md:text-4xl text-primary font-bold capitalize text-center">
-          The complete advanced 6 weeks course
+          The complete 4 weeks college application guide
         </h1>
 
         <div className="mt-8">
@@ -71,7 +70,7 @@ const Page = () => {
                 <span className="text-primary font-bold text-sm">4.8</span>
 
                 <span className="ml-1 text-primary text-sm">
-                  Rating(225,456)
+                  Rating(400)
                 </span>
               </div>
             </div>
@@ -82,7 +81,7 @@ const Page = () => {
 
               <div>
                 <span className="text-primary font-bold text-sm">
-                  1,234,567
+                  700+
                 </span>
 
                 <span className="ml-1 text-primary text-sm">Students</span>
@@ -95,7 +94,7 @@ const Page = () => {
 
               <div>
                 <span className="text-primary font-bold text-sm">
-                  Mr. Nahom Eyouel
+                  Mr. Nahom Jemberu
                 </span>
 
                 {/* <span className="ml-1 text-primary text-sm">
@@ -107,15 +106,39 @@ const Page = () => {
         </div>
 
         <div className="mt-8">
-          <p className="text-slate-500">
-            This course is designed to equip students with the essential skills
-            and knowledge needed to confidently enter college. Through a
-            well-structured curriculum, students will strengthen their academic
-            foundations, enhance critical thinking, and develop effective study
-            habits. The course also covers time management and personal
-            development strategies to help students transition smoothly into the
-            demands of college life, ensuring they are well-prepared for
-            academic success and personal growth.
+          {/* <h1 className="text-3xl font-semibold mb-6">What is Value College Prep?</h1> */}
+          <p className="text-slate-500 mb-4">
+            At Value College Prep, we don’t just apply to colleges for you; we
+            teach you how to apply to the best schools yourself. The reason we
+            empower you to take control of your application is simple: no one
+            will be as passionate about your future as you are. When you hand
+            off your application to someone else, they often put in the bare
+            minimum effort, which can lead to getting accepted into schools that
+            are a poor fit, have higher visa refusal rates, low scholarships, or
+            even worse—schools that aren’t accredited.
+          </p>
+          <p className="text-slate-500 mb-4">
+            {`Some students have faced serious issues like losing their passports,
+            being blackmailed, or overcharged by consultancies. The most
+            critical aspect, though, is that without demonstrating a deep
+            understanding of the application process, your visa could be
+            rejected. But if you're in control, you can avoid these risks and
+            get into a school that’s truly right for you.`}
+          </p>
+          <p className="text-slate-500 mb-4">
+            {`We will teach you how to apply yourself, but be prepared: this
+            course requires dedication. If your goal is simply to leave your
+            country without concern for the quality of the university, other
+            services might be a better fit. However, if you want to improve your
+            skills, understand the school and location you're going to, meet
+            alumni, and secure better scholarships, then this is the right
+            opportunity for you.`}
+          </p>
+          <p className="text-slate-500 mb-4">
+            Our program maximizes your chances of acceptance by guiding you
+            through the process with the necessary tools, resources, and
+            knowledge. Read on to learn more about what to expect in our Safety
+            Program.
           </p>
         </div>
 
