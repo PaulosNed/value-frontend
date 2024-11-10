@@ -39,7 +39,7 @@ import {
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useApplyMutation } from "@/store/users/usersApi";
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -141,7 +141,7 @@ export default function Page() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const { toast } = useToast()
+  const { toast } = useToast();
   const delta = currentStep - previousStep;
 
   const [apply, { data, isError, isSuccess }] = useApplyMutation();
@@ -154,32 +154,31 @@ export default function Page() {
     console.log("data from form", data);
     setIsLoading(true);
 
-    const response: any =  await apply(data).unwrap();
-    
+    const response: any = await apply(data).unwrap();
+
     if (response.data && response.status === 201) {
       toast({
         variant: "default",
-        title: `Successfully Applied` ,
+        title: `Successfully Applied`,
         description: `you have successfully applied`,
-      })
+      });
     } else {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: `${response.error.personalInformation.email[0]}`,
-      })
+      });
       console.log("Error found", response);
     }
-    
-    
+
     // Simulate form processing delay
     // await new Promise<void>((resolve) => {
-      //   setTimeout(() => {
-        //     setIsLoading(false);
-        //     resolve(); // Continue after 2 seconds
-        //   }, 2000);
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+    //     resolve(); // Continue after 2 seconds
+    //   }, 2000);
     // });
-    
+
     form.reset(); // Reset the form after the delay
     setIsLoading(false);
   };
@@ -1354,10 +1353,23 @@ export default function Page() {
             {currentStep === 7 && (
               <>
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
-                  Complete
+                  Thank you for your application!
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Thank you for your submission.
+                  We appreciate your interest and the time you’ve taken to
+                  complete the application. Our team will carefully review the
+                  information you provided. If everything is correct and we
+                  confirm your payment, we will send you an email with the
+                  details you need to access your account.
+                </p>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Please keep an eye on your email for this message. If you
+                  don’t receive it within a few days, be sure to check your spam
+                  or junk folder.
+                </p>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Thank you again for choosing us, and we look forward to
+                  working with you!
                 </p>
               </>
             )}
