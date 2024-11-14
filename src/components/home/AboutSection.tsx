@@ -29,7 +29,7 @@ const AboutSection = () => {
         </div>
         <div className="w-full md:w-1/2 md:flex md:justify-end">
           <div className="px-2 md:px-10 grid grid-cols-2 gap-x-8 md:gap-x-12 gap-y-6">
-            <CheckListItem text={"Grade"} color={"#85B6FF"} />
+            <CheckListItem text={"Grades"} color={"#85B6FF"} />
             <CheckListItem text={"Test Scores"} color={"#00FFC2"} />
             <CheckListItem text={"Essays"} color={"#0074FD"} />
             <CheckListItem text={"Extracurricular Activities"} color={"#FFB0A5"} />

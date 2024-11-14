@@ -28,8 +28,8 @@ const StatSection = () => {
     },
     {
       icon: "/images/home/student.svg",
-      number: "700+",
-      title: "Students Trained",
+      number: "6",
+      title: "Average Acceptances per Student",
     },
   ];
   return (
@@ -42,7 +42,7 @@ const StatSection = () => {
             </CardHeader>
             <CardContent className="flex flex-col items-center">
               <CardTitle className="">{stat.number}</CardTitle>
-              <CardDescription className="">{stat.title}</CardDescription>
+              <CardDescription className="text-center md:text-start">{stat.title}</CardDescription>
             </CardContent>
           </Card>
         ))}
