@@ -46,7 +46,7 @@ const Page = () => {
   }
 
   return (
-    <div className="w-full px-20 mt-10">
+    <div className="w-full px-10 md:px-20 mt-10">
       {(isLoading || isFetching || settingDashboard) && (
         <div className="flex flex-col space-y-4 mt-3">
           <Skeleton className="h-[80px]" />

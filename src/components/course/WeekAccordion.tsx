@@ -14,6 +14,17 @@ import { useRouter } from "next/navigation";
 import { MdDescription } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
+type WeekAccordionProps = {
+  id: number;
+  title: string;
+  count: number;
+  description: string;
+  courses: Course[];
+  currCourseId?: string;
+  pageOrder: string[];
+  collapsed: boolean;
+  setCollapsed: any;
+};
 const WeekAccordion = ({
   id,
   title,
@@ -22,7 +33,9 @@ const WeekAccordion = ({
   courses,
   currCourseId,
   pageOrder,
-}: Week) => {
+  collapsed,
+  setCollapsed,
+}: WeekAccordionProps) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentPage = useSelector((state: any) => state.navigation.currentPage);
@@ -44,9 +57,10 @@ const WeekAccordion = ({
           <div className="md:px-2 pt-4 pb-6 flex flex-col gap-5">
             {courses.map((course: Course) => (
               <div
-                onClick={(e) =>
-                  navigateToCourse(`/user/course/detail/${course.id}`)
-                }
+                onClick={(e) => {
+                  navigateToCourse(`/user/course/detail/${course.id}`);
+                  setCollapsed(true);
+                }}
                 key={course.id}
                 className={`flex justify-between hover:cursor-pointer hover:text-blue-700 group ${
                   pageOrder.indexOf(`/user/course/detail/${course.id}`) ===

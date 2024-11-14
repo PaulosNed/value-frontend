@@ -1,10 +1,5 @@
 "use client";
 
-import { Metadata } from "next";
-import Image from "next/image";
-
-import { Button } from "@/components/ui/button";
-
 import { FaCheckCircle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
 import { AiFillPlayCircle } from "react-icons/ai";
@@ -38,13 +33,13 @@ export default function DashboardPage() {
 
   if (isLoading || isFetching) {
     return (
-      <div className="grid grid-cols-12 gap-5 px-10 md:mt-32">
-        <Skeleton className="col-span-3 h-[200px]" />
-        <Skeleton className="col-span-3 h-[200px]" />
-        <Skeleton className="col-span-3 h-[200px]" />
-        <Skeleton className="col-span-3 h-[200px]" />
-        <Skeleton className="col-span-7 h-[500px]" />
-        <Skeleton className="col-span-5 h-[500px]" />
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-5 px-10 md:mt-32">
+        <Skeleton className="md:col-span-3 h-[200px]" />
+        <Skeleton className="md:col-span-3 h-[200px]" />
+        <Skeleton className="md:col-span-3 h-[200px]" />
+        <Skeleton className="md:col-span-3 h-[200px]" />
+        <Skeleton className="md:col-span-7 h-[500px]" />
+        <Skeleton className="md:col-span-5 h-[500px]" />
       </div>
     );
   }
@@ -59,7 +54,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="md:hidden">
+      {/* <div className="md:hidden">
         <Image
           src="/examples/dashboard-light.png"
           width={1280}
@@ -74,8 +69,8 @@ export default function DashboardPage() {
           alt="Dashboard"
           className="hidden dark:block"
         />
-      </div>
-      <div className="hidden flex-col md:flex">
+      </div> */}
+      <div className="flex flex-col">
         {/* <div className="border-b">
           <div className="flex h-16 items-center px-4">
             

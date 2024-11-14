@@ -49,7 +49,7 @@ const Page = () => {
         </h1>
 
         <div className="mt-8">
-          <div className="md:w-9/12 mx-auto flex justify-between">
+          <div className="md:w-9/12 mx-auto flex flex-col gap-4 md:flex-row md:justify-between">
             {/* Rating */}
             <div className="flex gap-3 items-center">
               <FaStar fill="#FFD233" />
@@ -151,6 +151,8 @@ const Page = () => {
                 description={week.description}
                 courses={week.courses}
                 pageOrder={pageOrder}
+                collapsed={false}
+                setCollapsed={() => {}}
               />
             ))}
         </div>
