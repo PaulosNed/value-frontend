@@ -5,6 +5,7 @@ import NavBar from "@/components/layout/NavBar";
 import StateProvider from "@/components/provider/StateProvider";
 import { Toaster } from "@/components/ui/toaster";
 import SessionWrapper from "@/config/SessionProvider";
+import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,9 @@ export default function RootLayout({
             <Toaster />
 
             {/* footer */}
-            <div className="py-10"></div>
+            <div className="pt-32">
+              <Footer />
+            </div>
           </body>
         </StateProvider>
       </html>

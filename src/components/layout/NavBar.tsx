@@ -76,7 +76,7 @@ const NavBar = () => {
             <Link href={"/login"}>Log in</Link>
           </Button>
           <Button asChild className="px-6">
-            <Link href={"/signup"}>Sign up</Link>
+            <Link href={"/apply"}>Sign up</Link>
           </Button>
         </div>
 
