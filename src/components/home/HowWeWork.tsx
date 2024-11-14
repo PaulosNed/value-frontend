@@ -7,7 +7,7 @@ const HowWeWork = () => {
     <div className='w-full flex flex-col-reverse md:flex-row md:h-[1000px]'>
         <div className='md:relative w-full md:w-8/12'>
             <img src="/images/home/ellipse.svg" alt="elipse decoration" className='hidden md:block md:absolute md:-left-1/3 md:top-0 md:h-full'/>
-            <div className='md:absolute md:top-[20%] md:left-1/4 w-3/4 mx-auto md:mx-0'>
+            <div className='md:absolute md:top-[20%] md:left-1/4 w-10/12 mx-auto md:mx-0'>
                 <DescriptionItems />
             </div>
         </div>

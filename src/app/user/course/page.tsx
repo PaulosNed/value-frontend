@@ -2,7 +2,6 @@
 "use client";
 
 import WeekAccordion from "@/components/course/WeekAccordion";
-import { toast } from "@/components/ui/use-toast";
 import { Week } from "@/Models/Week";
 import { useGetAllCoursesQuery } from "@/store/courses/coursesApi";
 import React, { useEffect, useState } from "react";
@@ -12,6 +11,7 @@ import { FaUsers } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Course } from "@/Models/Course";
+import ErrorPage from "@/app/ErrorPage";
 
 const Page = () => {
   const {
@@ -19,26 +19,10 @@ const Page = () => {
     isLoading,
     isFetching,
     isError,
-    error,
-    isSuccess,
   } = useGetAllCoursesQuery();
-
-  // console.log("weeks", weeks);
-  if (isError) {
-    {
-      console.log(error, isError);
-      toast({
-        variant: "destructive",
-        title: "Unable to fetch Courses",
-        description: (error as any)?.data?.detail,
-      });
-    }
-    return <div>Error</div>;
-  }
 
   const weeks: Week[] = response?.data;
   const [pageOrder, setPageOrder] = useState<string[]>([]);
-
   useEffect(() => {
     let order: string[] = [];
     weeks?.map((week: Week) => {
@@ -52,6 +36,10 @@ const Page = () => {
     console.log("order from useEffect", order);
     setPageOrder(order);
   }, [weeks]);
+
+  if (isError) {
+    return <ErrorPage />;
+  }
 
   return (
     <main>
@@ -69,9 +57,7 @@ const Page = () => {
               <div>
                 <span className="text-primary font-bold text-sm">4.8</span>
 
-                <span className="ml-1 text-primary text-sm">
-                  Rating(400)
-                </span>
+                <span className="ml-1 text-primary text-sm">Rating(400)</span>
               </div>
             </div>
 
@@ -80,9 +66,7 @@ const Page = () => {
               <FaUsers fill="#010A4B" />
 
               <div>
-                <span className="text-primary font-bold text-sm">
-                  700+
-                </span>
+                <span className="text-primary font-bold text-sm">700+</span>
 
                 <span className="ml-1 text-primary text-sm">Students</span>
               </div>

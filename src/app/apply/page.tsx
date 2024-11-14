@@ -171,14 +171,6 @@ export default function Page() {
       console.log("Error found", response);
     }
 
-    // Simulate form processing delay
-    // await new Promise<void>((resolve) => {
-    //   setTimeout(() => {
-    //     setIsLoading(false);
-    //     resolve(); // Continue after 2 seconds
-    //   }, 2000);
-    // });
-
     form.reset(); // Reset the form after the delay
     setIsLoading(false);
   };
@@ -227,7 +219,7 @@ export default function Page() {
         <nav aria-label="Progress">
           <ol
             role="list"
-            className="space-y-4 md:flex md:space-x-8 md:space-y-0"
+            className="space-y-4 hidden md:flex md:space-x-8 md:space-y-0"
           >
             {steps.map((step, index) => (
               <li key={step.name} className="md:flex-1">
@@ -279,7 +271,7 @@ export default function Page() {
                 <p className="mt-1 text-sm leading-6 text-gray-600">
                   Provide your personal details.
                 </p>
-                <div className="mt-10 grid grid-cols-6 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="mt-10 grid grid-cols-1 md:grid-cols-6 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="col-span-full md:col-span-2">
                     <FormField
                       control={form.control}
@@ -391,8 +383,8 @@ export default function Page() {
                   Address where you can receive mail.
                 </p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="sm:col-span-full">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-6">
+                  <div className="md:col-span-full">
                     <FormField
                       control={form.control}
                       name="address.country"
@@ -418,7 +410,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="address.street"
@@ -437,7 +429,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="address.street2"
@@ -457,7 +449,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="sm:col-span-2 sm:col-start-1">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="address.city"
@@ -476,7 +468,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="sm:col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="address.state"
@@ -495,7 +487,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="sm:col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="address.zipCode"
@@ -530,8 +522,8 @@ export default function Page() {
                   Additional Information about yourself.
                 </p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="sm:col-span-full">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-6">
+                  <div className="md:col-span-full">
                     {/* <FormField
                       control={form.control}
                       name="additionalInformation.dob"
@@ -597,7 +589,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="additionalInformation.maritialStatus"
@@ -626,7 +618,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="additionalInformation.gender"
@@ -748,14 +740,14 @@ export default function Page() {
                   Please provide the informations required below.
                 </p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="col-span-1 self-end">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 md:gap-y-8 md:grid-cols-6">
+                  <div className="col-span-1 mb-2 capitalize  md:mb-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>Sat Score</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="satScore.math"
@@ -776,7 +768,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="satScore.english"
@@ -796,13 +788,13 @@ export default function Page() {
                       )}
                     />
                   </div>
-                  <div className="col-span-1 self-end">
+                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>Other Scores</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="toeflScore"
@@ -823,7 +815,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="ieltsScore"
@@ -844,13 +836,13 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-1 self-end">
+                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>preferred Country</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="preferredCountryFirstChoice"
@@ -864,7 +856,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="preferredCountrySecondChoice"
@@ -878,13 +870,13 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-1 self-end">
+                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>preferred Major</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="preferredMajorFirstChoice"
@@ -898,7 +890,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="preferredMajorSecondChoice"
@@ -932,14 +924,14 @@ export default function Page() {
                   Please provide the informations required below.
                 </p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="col-span-1 self-end">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 md:gap-y-8 md:grid-cols-6">
+                  <div className="col-span-1 mb-2 capitalize  md:mb-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>10th Grade</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="education.tenthGradeSchoolName"
@@ -953,7 +945,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="education.tenthGradeYear"
@@ -966,13 +958,13 @@ export default function Page() {
                       )}
                     />
                   </div>
-                  <div className="col-span-1 self-end">
+                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>12th Grade</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="education.twelvethGradeSchoolName"
@@ -986,7 +978,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="education.twelvethGradeYear"
@@ -1000,13 +992,13 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-1 self-end">
+                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>Bachelors</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="education.bachelorsCollegeName"
@@ -1024,7 +1016,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="education.bachelorsYear"
@@ -1038,13 +1030,13 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-1 self-end">
+                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
                       <i>Masters</i>
                     </h2>
                   </div>
 
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <FormField
                       control={form.control}
                       name="education.mastersCollegeName"
@@ -1062,7 +1054,7 @@ export default function Page() {
                     />
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="md:col-span-2">
                     <FormField
                       control={form.control}
                       name="education.mastersYear"
@@ -1091,7 +1083,7 @@ export default function Page() {
                 <p className="mt-1 text-sm leading-6 text-gray-600">
                   Provide the personal details of your emergency contact.
                 </p>
-                <div className="mt-10 grid grid-cols-6 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-6">
                   <div className="col-span-full md:col-span-2">
                     <FormField
                       control={form.control}
@@ -1200,7 +1192,7 @@ export default function Page() {
                   </b>{" "}
                   {`This is only applicable for those with employment history. Feel free to skip this page if you don't have one`}{" "}
                 </p>
-                <div className="mt-10 grid grid-cols-6 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-6">
                   <div className="col-span-full md:col-span-2">
                     <FormField
                       control={form.control}

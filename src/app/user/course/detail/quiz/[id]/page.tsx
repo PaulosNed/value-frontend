@@ -1,5 +1,6 @@
 "use client";
 
+import ErrorPage from "@/app/ErrorPage";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/use-toast";
@@ -32,15 +33,7 @@ const QuizPage: React.FC = () => {
   const [score, setScore] = useState(0);
 
   if (isError) {
-    {
-      console.log(error, isError);
-      toast({
-        variant: "destructive",
-        title: "Unable to fetch Quiz",
-        description: (error as any)?.data?.detail,
-      });
-    }
-    return <div>Error</div>;
+    return <ErrorPage />;
   }
 
   const questions: Question[] = data?.data;

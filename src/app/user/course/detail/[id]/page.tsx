@@ -12,6 +12,7 @@ import parse from "html-react-parser";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useSetDashboardDataMutation } from "@/store/dashboard/dashboardApi";
+import ErrorPage from "@/app/ErrorPage";
 
 const Page = () => {
   const params = useParams<{ id: string }>();
@@ -31,15 +32,7 @@ const Page = () => {
 
   // console.log("weeks", weeks);
   if (isError) {
-    {
-      console.log(error, isError);
-      toast({
-        variant: "destructive",
-        title: "Unable to fetch Courses",
-        description: (error as any)?.data?.detail,
-      });
-    }
-    return <div>Error</div>;
+    return <ErrorPage />;
   }
 
   const course: Course = response?.data;

@@ -24,6 +24,7 @@ import { useGetDashboardDataQuery } from "@/store/dashboard/dashboardApi";
 import { toast } from "@/components/ui/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Course } from "@/Models/Course";
+import ErrorPage from "@/app/ErrorPage";
 
 export default function DashboardPage() {
   const {
@@ -49,15 +50,7 @@ export default function DashboardPage() {
   }
 
   if (isError) {
-    {
-      console.log(error, isError);
-      toast({
-        variant: "destructive",
-        title: "Unable to fetch Dashboard",
-        description: (error as any)?.data?.detail,
-      });
-    }
-    return <div>Error</div>;
+    return <ErrorPage />;
   }
 
   const dashboardData = response?.data;

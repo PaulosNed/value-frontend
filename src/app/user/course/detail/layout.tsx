@@ -17,6 +17,7 @@ import {
 } from "@/store/navigation/navigationSlice";
 import { useSetDashboardDataMutation } from "@/store/dashboard/dashboardApi";
 import { Skeleton } from "@/components/ui/skeleton";
+import ErrorPage from "@/app/ErrorPage";
 
 const Layout = ({
   children,
@@ -34,15 +35,7 @@ const Layout = ({
 
   // console.log("weeks", weeks);
   if (isError) {
-    {
-      console.log(error, isError);
-      toast({
-        variant: "destructive",
-        title: "Unable to fetch Courses",
-        description: (error as any)?.data?.detail,
-      });
-    }
-    return <div>Error</div>;
+    return <ErrorPage />;
   }
 
   const weeks: Week[] = response?.data;
