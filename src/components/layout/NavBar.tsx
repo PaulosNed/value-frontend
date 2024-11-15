@@ -105,7 +105,7 @@ const NavBar = () => {
                 <Link href={"/login"} className="text-primary">
                   Login
                 </Link>
-                <Link href={"/signup"} className="text-primary">
+                <Link href={"/apply"} className="text-primary">
                   Signup
                 </Link>
                 {/* <Button
