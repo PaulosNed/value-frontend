@@ -21,7 +21,7 @@ const HeroSection = () => {
         {/* two action buttons */}
         <div className="mt-12 flex flex-col md:flex-row w-full md:w-fit gap-3 md:gap-8">
             <Button className="px-12 py-2">Learn More</Button>
-            <Button variant="outline" className="px-12 border border-primary" asChild><Link href='/apply'>Apply Now</Link></Button>
+            <Button variant="outline" className="px-12 border border-primary" asChild><Link href='/#prices'>Apply Now</Link></Button>
         </div>
       </div>
     </div>

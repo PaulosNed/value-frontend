@@ -28,7 +28,7 @@ const PriceItem = ({ id, title, amount, pros, index, desc }: PriceItemProps) => 
         ))}
       </ul>
       <Button variant={index == 2 ? "default" : "outline"} className={`mt-10 px-4 border border-primary ${index == 2 ? "border border-secondary hover:bg-opacity-75" : ""}`} asChild>
-        <Link href="/apply">Choose plan</Link>
+        <Link href={`/apply/${id}`}>Choose plan</Link>
       </Button>
     </Card>
   );

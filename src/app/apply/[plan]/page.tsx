@@ -9,7 +9,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FormDataSchema } from "@/lib/schema";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import {
   Form,
@@ -137,6 +137,7 @@ const steps = [
 ];
 
 export default function Page() {
+  const { plan } = useParams();
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -152,27 +153,32 @@ export default function Page() {
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
     console.log("data from form", data);
+    const request = {
+      ...data,
+      planType: Number(plan),
+    };
     setIsLoading(true);
 
-    const response: any = await apply(data).unwrap();
-
-    if (response.data && response.status === 201) {
-      toast({
-        variant: "default",
-        title: `Successfully Applied`,
-        description: `you have successfully applied`,
+    const response: any = await apply(request)
+      .unwrap()
+      .then((payload) => {
+        toast({
+          variant: "default",
+          title: `Successfully Applied`,
+          description: `you have successfully applied`,
+        });
+        form.reset(); // Reset the form after the delay
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `${error.personalInformation.email[0]}`,
+        });
+        console.log("Error found", error);
+        setIsLoading(false);
       });
-    } else {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: `${response.error.personalInformation.email[0]}`,
-      });
-      console.log("Error found", response);
-    }
-
-    form.reset(); // Reset the form after the delay
-    setIsLoading(false);
   };
 
   type FieldName = keyof Inputs;

@@ -76,7 +76,7 @@ const NavBar = () => {
             <Link href={"/login"}>Log in</Link>
           </Button>
           <Button asChild className="px-6">
-            <Link href={"/apply"}>Sign up</Link>
+            <Link href={"/#prices"}>Apply</Link>
           </Button>
         </div>
 
@@ -105,8 +105,8 @@ const NavBar = () => {
                 <Link href={"/login"} className="text-primary">
                   Login
                 </Link>
-                <Link href={"/apply"} className="text-primary">
-                  Signup
+                <Link href={"/#prices"} className="text-primary">
+                  Apply
                 </Link>
                 {/* <Button
                   asChild
