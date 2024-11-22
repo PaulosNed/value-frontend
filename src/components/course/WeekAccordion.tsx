@@ -11,7 +11,7 @@ import { Week } from "@/Models/Week";
 import { setCurrentPage } from "@/store/navigation/navigationSlice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MdDescription } from "react-icons/md";
+import { MdAccessTime, MdDescription } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
 type WeekAccordionProps = {
@@ -75,7 +75,7 @@ const WeekAccordion = ({
                     {course.title}
                   </p>
                 </div>
-                <p className="text-md">{course.duration} mins</p>
+                <div className="text-md flex items-center gap-1"><MdAccessTime size={16} /> {course.duration} </div>
               </div>
             ))}
 

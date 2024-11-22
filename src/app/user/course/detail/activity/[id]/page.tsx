@@ -105,7 +105,7 @@ const ActivityPage: React.FC = () => {
   //   };
 
   return (
-    <div className="w-full md:w-10/12 mx-auto border px-10 md:px-20 flex flex-col py-8 gap-8">
+    <div className="w-full md:w-10/12 mx-auto md:border px-10 md:px-20 flex flex-col py-8 gap-8">
       {isLoading && (
         <div className="flex flex-col gap-4">
           <Skeleton className="h-[50px]" />
