@@ -62,20 +62,22 @@ const WeekAccordion = ({
                   setCollapsed(true);
                 }}
                 key={course.id}
-                className={`flex justify-between hover:cursor-pointer hover:text-blue-700 group ${
+                className={`grid grid-cols-12 hover:cursor-pointer hover:text-blue-700 group ${
                   pageOrder.indexOf(`/user/course/detail/${course.id}`) ===
                   currentPage
                     ? "text-blue-700 underline font-semibold"
                     : ""
                 }`}
               >
-                <div className="flex gap-2 items-center">
+                <div className="col-span-10 flex gap-2 items-center">
                   <MdDescription />
                   <p className="text-md group-hover:underline">
                     {course.title}
                   </p>
                 </div>
-                <div className="text-md flex items-center gap-1"><MdAccessTime size={16} /> {course.duration} </div>
+                <div className="col-span-2 text-md flex items-center gap-1">
+                  {course.duration} mins
+                </div>
               </div>
             ))}
 
