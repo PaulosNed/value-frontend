@@ -69,9 +69,9 @@ const WeekAccordion = ({
                     : ""
                 }`}
               >
-                <div className="col-span-10 flex gap-2 items-center">
-                  <MdDescription />
-                  <p className="text-md group-hover:underline">
+                <div className="col-span-10 grid grid-cols-10 items-center">
+                  <MdDescription className="col-span-1" />
+                  <p className="col-span-9 text-md group-hover:underline uppercase">
                     {course.title}
                   </p>
                 </div>
@@ -86,20 +86,20 @@ const WeekAccordion = ({
               onClick={(e) =>
                 navigateToCourse(`/user/course/detail/quiz/${id}`)
               }
-              className={`flex justify-between hover:cursor-pointer hover:text-blue-700 group ${
+              className={`grid grid-cols-12 hover:cursor-pointer hover:text-blue-700 group ${
                 pageOrder.indexOf(`/user/course/detail/quiz/${id}`) ===
                 currentPage
                   ? "text-blue-700 underline font-semibold"
                   : ""
               }`}
             >
-              <div className="flex gap-2 items-center">
-                <MdDescription />
-                <p className="text-md group-hover:underline">
+              <div className="col-span-10 grid grid-cols-10 items-center">
+                <MdDescription className="col-span-1" />
+                <p className="text-md group-hover:underline uppercase col-span-9">
                   Week {count} Quiz
                 </p>
               </div>
-              <p className="text-md"></p>
+              <p className="col-span-2 text-md"></p>
             </div>
 
             {/* Current week's activity */}
@@ -107,20 +107,20 @@ const WeekAccordion = ({
               onClick={(e) =>
                 navigateToCourse(`/user/course/detail/activity/${id}`)
               }
-              className={`flex justify-between hover:cursor-pointer hover:text-blue-700 group ${
+              className={`grid grid-cols-12 hover:cursor-pointer hover:text-blue-700 group ${
                 pageOrder.indexOf(`/user/course/detail/activity/${id}`) ===
                 currentPage
                   ? "text-blue-700 underline font-semibold"
                   : ""
               }`}
             >
-              <div className="flex gap-2 items-center">
-                <MdDescription />
-                <p className="text-md group-hover:underline">
+              <div className="col-span-10 grid grid-cols-10 items-center">
+                <MdDescription className="col-span-1" />
+                <p className="text-md group-hover:underline uppercase col-span-9">
                   Week {count} Activity
                 </p>
               </div>
-              <p className="text-md"></p>
+              <p className="col-span-2 text-md"></p>
             </div>
           </div>
         </AccordionContent>
