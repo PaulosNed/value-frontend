@@ -102,10 +102,10 @@ const NavBar = () => {
                 <div className="h-1"></div>
                 <hr className="-ml-6 mr-2" />
                 <div className="h-1"></div>
-                <Link href={"/login"} className="text-primary">
+                <Link href={"/login"} className="text-primary" onClick={() => setIsMenuToggled(false)}>
                   Login
                 </Link>
-                <Link href={"/#prices"} className="text-primary">
+                <Link href={"/#prices"} className="text-primary" onClick={() => setIsMenuToggled(false)}>
                   Apply
                 </Link>
                 {/* <Button

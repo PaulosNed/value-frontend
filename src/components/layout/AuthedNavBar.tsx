@@ -10,7 +10,8 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import NavLink from "./NavLink";
 import { AvatarMenu } from "../profile/AvatarMenu";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const AuthedNavBar = () => {
   const authenticatedNavItems = [
@@ -33,6 +34,17 @@ const AuthedNavBar = () => {
   ];
 
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
+  const router = useRouter();
+
+  const logout = (e: any) => {
+    signOut({ redirect: false })
+      .then(() => {
+        router.push("/login");
+      })
+      .catch((error) => {
+        console.error("Failed to sign out:", error);
+      });
+  };
 
   return (
     <NavigationMenu>
@@ -76,9 +88,12 @@ const AuthedNavBar = () => {
         {/* Mobile view */}
         <div className="block md:hidden">
           <div className="flex flex-col items-end relative">
-            <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
-              <img src={"/images/burger.svg"} alt="" width={40} height={40} />
-            </button>
+            <div className="flex gap-2">
+              <AvatarMenu />
+              <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
+                <img src={"/images/burger.svg"} alt="" width={40} height={40} />
+              </button>
+            </div>
 
             {/* Navigation section */}
             {isMenuToggled && (
@@ -88,27 +103,14 @@ const AuthedNavBar = () => {
                     <Link href={nav.link} className="text-primary">
                       {nav.name}
                     </Link>
-                    {/* <NavLink name={nav.name} link={nav.link} /> */}
-                  </div>
+                    </div>
                 ))}
                 <div className="h-1"></div>
                 <hr className="-ml-6 mr-2" />
                 <div className="h-1"></div>
-                <Link href={"/login"} className="text-primary">
-                  Profile
-                </Link>
-                <Link href={"/signup"} className="text-primary">
-                  Setting
-                </Link>
-                {/* <Button
-                  asChild
-                  className="-ml-5 mx-3 px-3 border border-primary"
-                  variant="outline"
-                >
-                  <Link href={"/login"}>Log in</Link>
-                </Button> */}
-                {/* <button className="btn">Login</button>
-              <button className="btn">Donate</button> */}
+                <div onClick={logout}>
+                  Logout
+                </div>
               </div>
             )}
           </div>

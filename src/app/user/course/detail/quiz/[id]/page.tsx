@@ -61,7 +61,7 @@ const QuizPage: React.FC = () => {
   };
 
   return (
-    <div className="md:w-10/12 mx-auto border px-20 flex flex-col py-8 gap-8">
+    <div className="md:w-10/12 mx-auto border px-10 md:px-20 flex flex-col py-8 gap-8">
       <p className="text-3xl font-semibold mb-6">Weekly Quiz</p>
       {isLoading && (
         <div className="flex flex-col gap-4">

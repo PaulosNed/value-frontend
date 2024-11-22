@@ -20,7 +20,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import ErrorPage from "@/app/ErrorPage";
 
 import { HiMenu } from "react-icons/hi";
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose } from "react-icons/ai";
+import { FaSignInAlt } from 'react-icons/fa';
+import { IoExitOutline } from 'react-icons/io5';
+import { MdExitToApp } from 'react-icons/md';
 
 const Layout = ({
   children,
@@ -133,12 +136,15 @@ const Layout = ({
       </div>
 
       <div
-        className={`fixed md:hidden z-40 top-20 ${collapsed ? "left-4" : "right-4"}`}
+        className={`fixed md:hidden z-40 top-20 mt-2 ${
+          collapsed ? "left-1" : "right-4"
+        }`}
         onClick={() => {
           setCollapsed((prev) => !prev);
         }}
       >
-        {collapsed ? <HiMenu size={24} /> : <AiOutlineClose size={24} />}
+        {collapsed ? <MdExitToApp size={30} />
+               : <AiOutlineClose size={24} />}
       </div>
 
       {/* Body */}
@@ -147,21 +153,29 @@ const Layout = ({
           {settingDashboard && <Skeleton className="w-full h-full" />}
           {!settingDashboard && children}
         </div>
-        <div className="px-10 md:px-20 mt-20 flex justify-between">
-          <Button
-            variant="outline"
-            className="px-12 border border-primary"
-            onClick={NavigateToPreviousPage}
-          >
-            Back
-          </Button>
-          <Button
-            className="px-12 border border-primary"
-            onClick={NavigateToNextPage}
-          >
-            Next
-          </Button>
-        </div>
+        {settingDashboard && (
+          <div className="px-10 md:px-20 mt-20 flex justify-between">
+            <Skeleton className="w-[120px] h-[45px]" />
+            <Skeleton className="w-[120px] h-[45px]" />
+          </div>
+        )}
+        {!settingDashboard && (
+          <div className="px-10 md:px-20 mt-20 flex justify-between">
+            <Button
+              variant="outline"
+              className="px-12 border border-primary"
+              onClick={NavigateToPreviousPage}
+            >
+              Back
+            </Button>
+            <Button
+              className="px-12 border border-primary"
+              onClick={NavigateToNextPage}
+            >
+              Next
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

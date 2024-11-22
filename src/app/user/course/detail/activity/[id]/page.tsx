@@ -11,6 +11,8 @@ import {
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
+import parse from "html-react-parser";
+import styles from "@/styles/RichTextStyles.module.css";
 
 interface Activity {
   id: number;
@@ -65,7 +67,12 @@ const ActivityPage: React.FC = () => {
       data: formData,
     });
 
-    console.log("RESPONSE FOR SUBMISSION", response, submissionError, submissionErrorData);
+    console.log(
+      "RESPONSE FOR SUBMISSION",
+      response,
+      submissionError,
+      submissionErrorData
+    );
 
     if (response?.error) {
       toast({
@@ -85,7 +92,7 @@ const ActivityPage: React.FC = () => {
   };
 
   if (isError) {
-    return <ErrorPage />
+    return <ErrorPage />;
   }
 
   const activity: Activity = data?.data;
@@ -98,7 +105,7 @@ const ActivityPage: React.FC = () => {
   //   };
 
   return (
-    <div className="w-10/12 mx-auto border px-20 flex flex-col py-8 gap-8">
+    <div className="w-full md:w-10/12 mx-auto border px-10 md:px-20 flex flex-col py-8 gap-8">
       {isLoading && (
         <div className="flex flex-col gap-4">
           <Skeleton className="h-[50px]" />
@@ -110,7 +117,11 @@ const ActivityPage: React.FC = () => {
           <h1 className="text-3xl font-semibold mb-6">
             Week {activity.week} Activity
           </h1>
-          <h1 className="mb-8">{activity.description}</h1>
+          <div className="mb-8">
+            <div className={styles.richTextContent}>
+              {parse(activity.description)}
+            </div>
+          </div>
           <div className="w-full max-w-lg">
             <input
               id="activityFiles"

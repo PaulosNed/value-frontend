@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'https://cdn.ckeditor.com/4.16.2/full-all/contents.css';
 
 @layer base {
   :root {
