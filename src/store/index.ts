@@ -3,6 +3,7 @@ import { userApi } from './users/usersApi'
 import { coursesApi } from './courses/coursesApi'
 import { dashboardApi } from './dashboard/dashboardApi'
 import navigationReducer from './navigation/navigationSlice'
+import authMiddleware from './auth/authMiddlewear'
 
 
 export const store = configureStore({
@@ -13,7 +14,7 @@ export const store = configureStore({
     navigation: navigationReducer,
   },
 
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(userApi.middleware, coursesApi.middleware, dashboardApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(userApi.middleware, coursesApi.middleware, dashboardApi.middleware, authMiddleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

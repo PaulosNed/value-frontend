@@ -2,17 +2,8 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_ENDPOINT;
-
-const isTokenExpired = (token: any) => {
-  const decoded = jwtDecode(token);
-  const now = Math.floor(Date.now() / 1000);
-
-  return decoded.exp! < now;
-};
 
 const handler = NextAuth({
   providers: [
@@ -103,49 +94,12 @@ const handler = NextAuth({
         const decoded: any = jwtDecode(token.accessToken as string);
         const userData = decoded.user;
         token.user = userData;
-        token.expired = false;
-      }
-
-      if (isTokenExpired(token.accessToken)) {
-        try {
-          const res = await fetch(`${BACKEND_URL}/api/token/refresh/`, {
-            method: "POST",
-            body: JSON.stringify({ refresh: token.refreshToken }),
-            headers: { "Content-Type": "application/json" },
-          });
-
-          const data = await res.json();
-          const decoded = jwtDecode(data.access);
-
-          token.accessToken = data.access;
-          token.refreshToken = data.refresh;
-          token.user = (decoded as any).user;
-          token.expired = false;
-        } catch (error) {
-          token.expired = true;
-        }
       }
 
       return token;
     },
 
     async session({ session, token }) {
-      if (token.expired) {
-        signOut({ redirect: false })
-          .then(() => {
-            if (typeof window !== "undefined") {
-              window.location.href = "/";
-            }
-          })
-          .catch((error) => {
-            console.error("Failed to sign out:", error);
-          });
-        return {
-          ...session,
-          error: "Refresh token expired",
-        };
-      }
-
       (session as any).accessToken = token.accessToken;
       (session as any).refreshToken = token.refreshToken;
       (session as any).user = token.user;
