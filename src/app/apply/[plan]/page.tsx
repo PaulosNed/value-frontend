@@ -167,6 +167,8 @@ export default function Page() {
           title: `Successfully Applied`,
           description: `you have successfully applied`,
         });
+        setPreviousStep(currentStep);
+        setCurrentStep((step) => step + 1);
         form.reset(); // Reset the form after the delay
         setIsLoading(false);
       })
@@ -174,7 +176,7 @@ export default function Page() {
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: `${error.personalInformation.email[0]}`,
+          description: `Unable to submit the application`,
         });
         console.log("Error found", error);
         setIsLoading(false);
@@ -202,9 +204,7 @@ export default function Page() {
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
         await form.handleSubmit(processForm)(); // Wait for form submission to finish
-        setPreviousStep(currentStep);
-        setCurrentStep((step) => step + 1); // Move to the next step after submission
-      } else {
+        } else {
         setPreviousStep(currentStep);
         setCurrentStep((step) => step + 1); // Move to the next step immediately
       }
@@ -284,7 +284,12 @@ export default function Page() {
                       name="personalInformation.firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First name</FormLabel>
+                          <FormLabel>
+                            First name{" "}
+                            {FormDataSchema.shape.personalInformation.shape.firstName.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="firstName"
@@ -303,7 +308,12 @@ export default function Page() {
                       name="personalInformation.middleName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Middle name</FormLabel>
+                          <FormLabel>
+                            Middle name{" "}
+                            {FormDataSchema.shape.personalInformation.shape.middleName.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="middleName"
@@ -322,7 +332,12 @@ export default function Page() {
                       name="personalInformation.lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last name</FormLabel>
+                          <FormLabel>
+                            Last name{" "}
+                            {FormDataSchema.shape.personalInformation.shape.lastName.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="lastName"
@@ -341,7 +356,12 @@ export default function Page() {
                       name="personalInformation.email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email address</FormLabel>
+                          <FormLabel>
+                            Email address{" "}
+                            {FormDataSchema.shape.personalInformation.shape.email.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="email"
                             id="email"
@@ -360,7 +380,12 @@ export default function Page() {
                       name="personalInformation.phoneNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone number</FormLabel>
+                          <FormLabel>
+                            Phone number{" "}
+                            {FormDataSchema.shape.personalInformation.shape.phoneNumber.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="tel"
                             id="phoneNumber"
@@ -396,7 +421,12 @@ export default function Page() {
                       name="address.country"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Country</FormLabel>
+                          <FormLabel>
+                            Country{" "}
+                            {FormDataSchema.shape.address.shape.country.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={field.value}
@@ -422,7 +452,12 @@ export default function Page() {
                       name="address.street"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Street address 1</FormLabel>
+                          <FormLabel>
+                            Street address 1{" "}
+                            {FormDataSchema.shape.address.shape.street.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="street"
@@ -441,7 +476,12 @@ export default function Page() {
                       name="address.street2"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Street address 2 (optional)</FormLabel>
+                          <FormLabel>
+                            Street address 2{" "}
+                            {FormDataSchema.shape.address.shape.street2.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="street2"
@@ -461,7 +501,12 @@ export default function Page() {
                       name="address.city"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>City</FormLabel>
+                          <FormLabel>
+                            City{" "}
+                            {FormDataSchema.shape.address.shape.city.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="city"
@@ -480,7 +525,12 @@ export default function Page() {
                       name="address.state"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>State</FormLabel>
+                          <FormLabel>
+                            State{" "}
+                            {FormDataSchema.shape.address.shape.state.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="state"
@@ -499,7 +549,12 @@ export default function Page() {
                       name="address.zipCode"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>ZIP / Postal code</FormLabel>
+                          <FormLabel>
+                            ZIP / Postal code{" "}
+                            {FormDataSchema.shape.address.shape.zipCode.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="zipCode"
@@ -580,7 +635,12 @@ export default function Page() {
                       name="additionalInformation.dob"
                       render={({ field }) => (
                         <FormItem className="flex flex-col">
-                          <FormLabel>Date of Birth</FormLabel>
+                          <FormLabel>
+                            Date of Birth{" "}
+                            {FormDataSchema.shape.additionalInformation.shape.dob.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <FormControl>
                             <Input
                               {...field}
@@ -601,7 +661,12 @@ export default function Page() {
                       name="additionalInformation.maritialStatus"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Maritial Status</FormLabel>
+                          <FormLabel>
+                            Maritial Status{" "}
+                            {FormDataSchema.shape.additionalInformation.shape.maritialStatus.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={field.value}
@@ -630,7 +695,12 @@ export default function Page() {
                       name="additionalInformation.gender"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Gender</FormLabel>
+                          <FormLabel>
+                            Gender{" "}
+                            {FormDataSchema.shape.additionalInformation.shape.dob.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Select
                             onValueChange={field.onChange}
                             autoComplete="sex"
@@ -657,7 +727,12 @@ export default function Page() {
                       name="additionalInformation.passportNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Passport Number</FormLabel>
+                          <FormLabel>
+                            Passport Number{" "}
+                            {FormDataSchema.shape.additionalInformation.shape.passportNumber.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="passportNumber"
@@ -676,7 +751,12 @@ export default function Page() {
                       name="additionalInformation.anyDependents"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>Are you bringing any Dependent?</FormLabel>
+                          <FormLabel>
+                            Are you bringing any Dependent?{" "}
+                            {FormDataSchema.shape.additionalInformation.shape.anyDependents.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <FormControl>
                             <RadioGroup
                               // value={field.value ? "true" : "false"}  // Reflect the current value
@@ -717,7 +797,10 @@ export default function Page() {
                         <FormItem>
                           <FormLabel>
                             If Yes, What is your relationship with the
-                            dependant?
+                            dependant?{" "}
+                            {FormDataSchema.shape.additionalInformation.shape.relationship.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
                           </FormLabel>
                           <Input
                             type="text"
@@ -854,7 +937,12 @@ export default function Page() {
                       name="preferredCountryFirstChoice"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Choice</FormLabel>
+                          <FormLabel>
+                            First Choice{" "}
+                            {FormDataSchema.shape.preferredCountryFirstChoice.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input type="text" id="firstChoice" {...field} />
                           <FormMessage />
                         </FormItem>
@@ -868,7 +956,12 @@ export default function Page() {
                       name="preferredCountrySecondChoice"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Second Choice</FormLabel>
+                          <FormLabel>
+                            Second Choice{" "}
+                            {FormDataSchema.shape.preferredCountrySecondChoice.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input type="text" id="secondChoice" {...field} />
                           <FormMessage />
                         </FormItem>
@@ -888,7 +981,12 @@ export default function Page() {
                       name="preferredMajorFirstChoice"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Choice</FormLabel>
+                          <FormLabel>
+                            First Choice{" "}
+                            {FormDataSchema.shape.preferredMajorFirstChoice.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input type="text" id="firstChoiceMajor" {...field} />
                           <FormMessage />
                         </FormItem>
@@ -902,7 +1000,12 @@ export default function Page() {
                       name="preferredMajorSecondChoice"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Second Choice</FormLabel>
+                          <FormLabel>
+                            Second Choice{" "}
+                            {FormDataSchema.shape.preferredMajorSecondChoice.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="secondChoiceMajor"
@@ -1096,7 +1199,12 @@ export default function Page() {
                       name="emergencyContact.name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name</FormLabel>
+                          <FormLabel>
+                            Full Name{" "}
+                            {FormDataSchema.shape.emergencyContact.shape.name.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="emergencyContactName"
@@ -1114,7 +1222,12 @@ export default function Page() {
                       name="emergencyContact.email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email address</FormLabel>
+                          <FormLabel>
+                            Email address{" "}
+                            {FormDataSchema.shape.emergencyContact.shape.email.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="email"
                             id="emergencyContactEmail"
@@ -1132,7 +1245,12 @@ export default function Page() {
                       name="emergencyContact.relation"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Relationship</FormLabel>
+                          <FormLabel>
+                            Relationship{" "}
+                            {FormDataSchema.shape.emergencyContact.shape.relation.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="emergencyContactRelationship"
@@ -1150,7 +1268,12 @@ export default function Page() {
                       name="emergencyContact.address"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Address</FormLabel>
+                          <FormLabel>
+                            Address{" "}
+                            {FormDataSchema.shape.emergencyContact.shape.address.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="emergencyContactAddress"
@@ -1168,7 +1291,12 @@ export default function Page() {
                       name="emergencyContact.phoneNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone number</FormLabel>
+                          <FormLabel>
+                            Phone number{" "}
+                            {FormDataSchema.shape.emergencyContact.shape.phoneNumber.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
                             id="emergencyContactPhone"

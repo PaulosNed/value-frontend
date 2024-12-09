@@ -146,12 +146,16 @@ const Pricing = () => {
                     color: '#00FFC2',
                     text: 'Familiarization with English Proficiency Tests (TOEFL, IELTS, Duolingo)'
                 },
+                {
+                    color: '#0074FD',
+                    text: 'Guaranteed admission to atleast 3 universities'
+                },
             ]
         },
         {
             id: '3',
             title: 'Premium',
-            amount: '300,000ETB',
+            amount: 'Personalized Pricing',
             pros: [
                 {
                     color: '#85B6FF',
@@ -228,6 +232,10 @@ const Pricing = () => {
                 {
                     color: '#0074FD',
                     text: 'Learning Necessary Documents for application readiness'
+                },
+                {
+                    color: '#FFB0A5',
+                    text: 'Guaranteed admission to atleast 5 universities'
                 },
             ]
         }

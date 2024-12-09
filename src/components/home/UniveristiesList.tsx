@@ -27,32 +27,32 @@ const UniveristiesList = () => {
     {
       icon: "/images/home/yale.svg",
       title: "Yale University",
-      description: "Acceptance rate: 4.5%",
+      description: "Acceptance rate: 4.23%",
     },
     {
       icon: "/images/home/harvard.svg",
       title: "Harvard University",
-      description: "Acceptance rate: 4.5%",
+      description: "Acceptance rate: 3.43%",
     },
     {
       icon: "/images/home/columbia.svg",
       title: "Columbia University",
-      description: "Acceptance rate: 4.5%",
+      description: "Acceptance rate: 3.9%",
     },
     {
       icon: "/images/home/princeton.svg",
       title: "Princeton University",
-      description: "Acceptance rate: 4.5%",
+      description: "Acceptance rate: 4.38%",
     },
     {
       icon: "/images/home/brown.svg",
       title: "Brown University",
-      description: "Acceptance rate: 4.5%",
+      description: "Acceptance rate: 4.03%",
     },
     {
       icon: "/images/home/cornell.svg",
       title: "Cornell University",
-      description: "Acceptance rate: 4.5%",
+      description: "Acceptance rate: 6.72%",
     },
   ];
 
