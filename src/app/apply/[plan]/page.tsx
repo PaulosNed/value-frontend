@@ -176,7 +176,7 @@ export default function Page() {
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: `Unable to submit the application`,
+          description: `${error.data.error.message}`,
         });
         console.log("Error found", error);
         setIsLoading(false);
