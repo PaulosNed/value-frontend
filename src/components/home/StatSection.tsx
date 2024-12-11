@@ -8,26 +8,29 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FaCheckCircle, FaUserGraduate, FaUsers } from "react-icons/fa";
+import { MdPieChartOutline, MdBarChart } from "react-icons/md";
+import { FaChartLine } from "react-icons/fa";
 
 interface Stat {
-  icon: string;
+  icon: React.ReactNode;
   number: string;
   title: string;
 }
 const StatSection = () => {
   const stats: Stat[] = [
     {
-      icon: "/images/home/studentsAdmitted.svg",
+      icon: <FaUsers size={40} className="w-20 h-20 md:w-fit md:h-fit text-slate-600" />,
       number: "400+",
       title: "Students Admitted",
     },
     {
-      icon: "/images/home/database.svg",
+      icon: <FaCheckCircle size={40} className="w-20 h-20 md:w-fit md:h-fit text-slate-600" />,
       number: "99%",
       title: "Acceptance Rate",
     },
     {
-      icon: "/images/home/student.svg",
+      icon: <FaChartLine size={40} className="w-20 h-20 md:w-fit md:h-fit text-slate-600" />,
       number: "6",
       title: "Average Acceptances per Student",
     },
@@ -36,13 +39,16 @@ const StatSection = () => {
     <div className="w-8/12 mx-auto">
       <div className="flex flex-col md:flex-row md:justify-between gap-4 md:gap-20">
         {stats.map((stat, index) => (
-          <Card key={index} className="md:w-4/12 flex flex-col items-center justify-center md:gap-4 shadow-md">
-            <CardHeader>
-              <img src={stat.icon} alt={stat.title} className="w-8 h-8 md:w-fit md:h-fit"/>
-            </CardHeader>
+          <Card
+            key={index}
+            className="md:w-4/12 flex flex-col items-center justify-center md:gap-2 shadow-md"
+          >
+            <CardHeader>{stat.icon}</CardHeader>
             <CardContent className="flex flex-col items-center">
               <CardTitle className="">{stat.number}</CardTitle>
-              <CardDescription className="text-center md:text-start">{stat.title}</CardDescription>
+              <CardDescription className="text-center md:text-start">
+                {stat.title}
+              </CardDescription>
             </CardContent>
           </Card>
         ))}
