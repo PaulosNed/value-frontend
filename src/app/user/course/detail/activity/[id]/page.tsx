@@ -62,8 +62,10 @@ const ActivityPage: React.FC = () => {
       formData.append("files", selectedFiles[i]);
     }
 
+    console.log(id, formData, data);
+
     const response = await submitActivity({
-      id: id,
+      id: data.data.id,
       data: formData,
     });
 
