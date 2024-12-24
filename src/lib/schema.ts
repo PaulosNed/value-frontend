@@ -4,12 +4,10 @@ const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
 const currentYear = new Date().getFullYear();
-const yearRegex = new RegExp(
-  `^(19[0-9]{2}|20[0-${currentYear.toString()[2]}][0-${
-    currentYear.toString()[3]
-  }])$`
-);
 const passportRegex = new RegExp(/^[A-Z0-9]{6,9}$/);
+const yearRegex = new RegExp(
+  /^(19[0-9]{2}|20[0-9]{2})$/
+);
 
 export const FormDataSchema = z.object({
   personalInformation: z.object({
@@ -93,20 +91,10 @@ export const FormDataSchema = z.object({
     .max(9, "Invalid IELTS Score")
     .optional(),
   education: z.object({
-    tenthGradeSchoolName: z.string({
+    currentHighschool: z.string({
       required_error: "School Name is required",
     }),
-    tenthGradeYear: z.string().regex(yearRegex, "Invalid Year"),
-    twelvethGradeSchoolName: z.string({
-      required_error: "School Name is required",
-    }),
-    twelvethGradeYear: z.string().regex(yearRegex, "Invalid Year"),
-    bachelorsCollegeName: z.string({
-      required_error: "College Name is required",
-    }),
-    bachelorsYear: z.string().regex(yearRegex, "Invalid Year"),
-    mastersCollegeName: z.string({ required_error: "School Name is required" }),
-    mastersYear: z.string().regex(yearRegex, "Invalid Year"),
+    graduationYear: z.string().regex(yearRegex, "Invalid Year"),
   }),
   emergencyContact: z.object({
     name: z.string({ required_error: "Name is required" }),

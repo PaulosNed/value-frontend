@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-
 const BASE_URL = process.env.NEXT_PUBLIC_ENDPOINT;
 
 export const userApi = createApi({
@@ -19,7 +18,6 @@ export const userApi = createApi({
   }),
 
   endpoints: (builder) => ({
-
     login: builder.mutation<any, any>({
       query: (data) => ({
         url: `/api/token/`,
@@ -43,11 +41,19 @@ export const userApi = createApi({
         body: data,
       }),
     }),
+
+    getHighSchools: builder.query<{ name: string, id: number }[], void>({
+      query: () => ({
+        url: `/users/high-school/`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 export const {
-    useLoginMutation,
-    useApplyMutation,
-    useSignupMutation,
+  useLoginMutation,
+  useApplyMutation,
+  useSignupMutation,
+  useGetHighSchoolsQuery,
 } = userApi;

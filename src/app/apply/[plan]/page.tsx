@@ -38,7 +38,10 @@ import {
 // import { CalendarIcon } from "lucide-react";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useApplyMutation } from "@/store/users/usersApi";
+import {
+  useApplyMutation,
+  useGetHighSchoolsQuery,
+} from "@/store/users/usersApi";
 import { useToast } from "@/components/ui/use-toast";
 
 type Inputs = z.infer<typeof FormDataSchema>;
@@ -97,16 +100,7 @@ const steps = [
   {
     id: "Step 5",
     name: "Education",
-    fields: [
-      "education.tenthGradeSchoolName",
-      "education.tenthGradeYear",
-      "education.twelvethGradeSchoolName",
-      "education.twelvethGradeYear",
-      "education.bachelorsSchoolName",
-      "education.bachelorsYear",
-      "education.mastersSchoolName",
-      "education.mastersYear",
-    ],
+    fields: ["education.currentHighschool", "education.graduationYear"],
   },
   {
     id: "Step 6",
@@ -145,14 +139,15 @@ export default function Page() {
   const { toast } = useToast();
   const delta = currentStep - previousStep;
 
-  const [apply, { data, isError, isSuccess }] = useApplyMutation();
+  const [apply, { data, isError, isSuccess, error: submissionError }] = useApplyMutation();
+  const { data: highschools, isLoading: highschoolsLoading } =
+    useGetHighSchoolsQuery();
 
   const form = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
   });
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
-    console.log("data from form", data);
     const request = {
       ...data,
       planType: Number(plan),
@@ -173,12 +168,12 @@ export default function Page() {
         setIsLoading(false);
       })
       .catch((error) => {
+        console.log("Error found", error);
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
           description: `${error.data.error.message}`,
         });
-        console.log("Error found", error);
         setIsLoading(false);
       });
   };
@@ -217,6 +212,11 @@ export default function Page() {
       setCurrentStep((step) => step - 1);
     }
   };
+
+  const highschoolOptions = highschools?.map((school) => ({
+    value: school.id.toString(),
+    label: school.name,
+  }));
 
   return (
     <div className="w-full md:w-3/4 mx-auto items-center md:shadow-custom-blue md:rounded-lg md:mt-10">
@@ -261,10 +261,7 @@ export default function Page() {
 
         {/* Form */}
         <Form {...form}>
-          <form
-            className="mt-12 py-12"
-            onSubmit={form.handleSubmit(processForm)}
-          >
+          <div className="mt-12 py-12">
             {currentStep === 0 && (
               <motion.div
                 initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
@@ -1033,21 +1030,43 @@ export default function Page() {
                   Please provide the informations required below.
                 </p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 md:gap-y-8 md:grid-cols-6">
-                  <div className="col-span-1 mb-2 capitalize  md:mb-0 md:self-end">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 md:gap-y-8 md:grid-cols-8">
+                  <div className="col-span-2 mb-2 capitalize  md:mb-0 md:self-end">
                     <h2 className="text-slate-500 md:py-3">
-                      <i>10th Grade</i>
+                      <i>Current Highschool</i>
                     </h2>
                   </div>
 
-                  <div className="md:col-span-3">
+                  <div className="md:col-span-4">
                     <FormField
                       control={form.control}
-                      name="education.tenthGradeSchoolName"
+                      name="education.currentHighschool"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>School Name</FormLabel>
-                          <Input type="text" id="schoolName10th" {...field} />
+                          <FormLabel>
+                            Current Highschool name{" "}
+                            {FormDataSchema.shape.education.shape.currentHighschool.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Current HighSchool" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {!highschoolsLoading &&
+                                highschoolOptions?.map((option, idx) => (
+                                  <SelectItem key={idx} value={option.value}>
+                                    {option.label}
+                                  </SelectItem>
+                                ))}
+                            </SelectContent>
+                          </Select>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -1057,120 +1076,20 @@ export default function Page() {
                   <div className="md:col-span-2">
                     <FormField
                       control={form.control}
-                      name="education.tenthGradeYear"
+                      name="education.graduationYear"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Year</FormLabel>
-                          <Input type="text" id="year10th" {...field} />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
-                    <h2 className="text-slate-500 md:py-3">
-                      <i>12th Grade</i>
-                    </h2>
-                  </div>
-
-                  <div className="md:col-span-3">
-                    <FormField
-                      control={form.control}
-                      name="education.twelvethGradeSchoolName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>School Name</FormLabel>
-                          <Input type="text" id="schoolName12th" {...field} />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="education.twelvethGradeYear"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Year</FormLabel>
-                          <Input type="text" id="year12th" {...field} />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
-                    <h2 className="text-slate-500 md:py-3">
-                      <i>Bachelors</i>
-                    </h2>
-                  </div>
-
-                  <div className="md:col-span-3">
-                    <FormField
-                      control={form.control}
-                      name="education.bachelorsCollegeName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>College Name</FormLabel>
+                          <FormLabel>
+                            Graduation Year{" "}
+                            {FormDataSchema.shape.education.shape.graduationYear.isOptional() ? null : (
+                              <span className="text-orange-500">*</span>
+                            )}
+                          </FormLabel>
                           <Input
                             type="text"
-                            id="collegeNameBachelors"
+                            id="highschoolGraduationYear"
                             {...field}
                           />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="education.bachelorsYear"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Year</FormLabel>
-                          <Input type="number" id="yearBachelors" {...field} />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-1 mt-8 mb-2 capitalize  md:my-0 md:self-end">
-                    <h2 className="text-slate-500 md:py-3">
-                      <i>Masters</i>
-                    </h2>
-                  </div>
-
-                  <div className="md:col-span-3">
-                    <FormField
-                      control={form.control}
-                      name="education.mastersCollegeName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>College Name</FormLabel>
-                          <Input
-                            type="text"
-                            id="collegeNameMasters"
-                            {...field}
-                          />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="education.mastersYear"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Year</FormLabel>
-                          <Input type="number" id="yearMasters" {...field} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -1499,7 +1418,7 @@ export default function Page() {
                 </p>
               </>
             )}
-          </form>
+          </div>
         </Form>
 
         {/* Navigation */}
