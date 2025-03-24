@@ -20,6 +20,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Course } from "@/Models/Course";
 import ErrorPage from "@/app/ErrorPage";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const {
@@ -144,10 +145,16 @@ export default function DashboardPage() {
                     <FaDotCircle className="text-slate-500" size={22} />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{`Week ${dashboardData.current_week.count}`}</div>
-                    <p className="text-xs text-muted-foreground">
-                      {dashboardData.current_week.title}
-                    </p>
+                    <Link
+                      href={`/user/course/detail/${dashboardData.current_week.id}`}
+                      passHref
+                      className="hover:cursor-pointer"
+                    >
+                      <div className="text-2xl font-bold">{`Week ${dashboardData.current_week.count}`}</div>
+                      <p className="text-xs text-muted-foreground">
+                        {dashboardData.current_week.title}
+                      </p>
+                    </Link>
                   </CardContent>
                 </Card>
                 <Card>
@@ -158,12 +165,18 @@ export default function DashboardPage() {
                     <AiFillPlayCircle className="text-slate-500" size={24} />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-xl font-bold">
-                      {dashboardData.current_course.title}
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      {`Course number ${dashboardData.current_course.count} from ${dashboardData.current_week.title}`}
-                    </p>
+                    <Link
+                      href={`/user/course/detail/${dashboardData.current_week.id}`}
+                      passHref
+                      className="hover:cursor-pointer"
+                    >
+                      <div className="text-xl font-bold">
+                        {dashboardData.current_course.title}
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        {`Course number ${dashboardData.current_course.count} from ${dashboardData.current_week.title}`}
+                      </p>
+                    </Link>
                   </CardContent>
                 </Card>
               </div>
