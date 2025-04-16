@@ -1,6 +1,7 @@
 "use client"
 
 import AboutSection from "@/components/home/AboutSection";
+import FreeTial from "@/components/home/FreeTial";
 import HeroSection from "@/components/home/HeroSection";
 import HowWeWork from "@/components/home/HowWeWork";
 import Pricing from "@/components/home/Pricing";
@@ -56,9 +57,9 @@ export default function Home() {
 
       <div
         className="p-4 w-full md:w-9/12 md:mx-auto pt-12 md:pt-32"
-        id="prices"
+        id="demo"
       >
-        <Pricing />
+        <FreeTial />
       </div>
 
       <div className="h-20"></div>

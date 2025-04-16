@@ -31,8 +31,8 @@ const NavBar = () => {
       link: "#workflow",
     },
     {
-      name: "Prices",
-      link: "#prices",
+      name: "Free Trial",
+      link: "#demo",
     },
   ];
 

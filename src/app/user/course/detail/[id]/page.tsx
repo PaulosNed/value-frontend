@@ -8,6 +8,7 @@ import styles from "@/styles/RichTextStyles.module.css";
 
 import parse from "html-react-parser";
 import ErrorPage from "@/app/ErrorPage";
+import CourseDetail from "@/components/course/CourseDetail";
 
 const Page = () => {
   const params = useParams<{ id: string }>();
@@ -27,20 +28,7 @@ const Page = () => {
 
   return (
     <div className="w-full px-10 md:px-20 mt-10">
-      {(isLoading || isFetching ) && (
-        <div className="flex flex-col space-y-4 mt-3">
-          <Skeleton className="h-[80px]" />
-          <Skeleton className="h-[300px]" />
-          <Skeleton className="h-[500px]" />
-        </div>
-      )}
-      <div className={styles.richTextContent}>
-        {!isLoading && !isFetching && (
-          <>
-            {parse(course.description)}
-          </>
-        )}
-      </div>
+      <CourseDetail isLoading={isLoading} isFetching={isFetching} course={course} />
     </div>
   );
 };

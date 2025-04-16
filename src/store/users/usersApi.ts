@@ -48,6 +48,13 @@ export const userApi = createApi({
         method: "GET",
       }),
     }),
+
+    getDemoCourses: builder.query<any, void>({
+      query: () => ({
+        url: `/courses/demo/`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -56,4 +63,5 @@ export const {
   useApplyMutation,
   useSignupMutation,
   useGetHighSchoolsQuery,
+  useGetDemoCoursesQuery,
 } = userApi;
