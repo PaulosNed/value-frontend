@@ -138,13 +138,13 @@ const FreeTrial = () => {
               >
                 Apply for Full Course
               </Button>
-              {/* <Button
+              <Button
                 variant="outline"
                 onClick={() => setShowDialog(false)}
-                className="w-full py-6 font-medium"
+                className="w-full py-5 outline outline-1 outline-neutral-300 font-medium bg-transparent hover:bg-transparent"
               >
                 Maybe Later
-              </Button> */}
+              </Button>
             </div>
           </DialogFooter>
         </DialogContent>
