@@ -18,7 +18,7 @@ export const footerLinks = [
   },
   {
     linkName: "Prices",
-    linkPath: "#prices",
+    linkPath: "apply",
   },
 ];
 

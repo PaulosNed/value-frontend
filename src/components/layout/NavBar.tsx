@@ -76,7 +76,7 @@ const NavBar = () => {
             <Link href={"/login"}>Log in</Link>
           </Button>
           <Button asChild className="px-6">
-            <Link href={"/#prices"}>Apply</Link>
+            <Link href={"/apply"}>Apply</Link>
           </Button>
         </div>
 
@@ -105,7 +105,7 @@ const NavBar = () => {
                 <Link href={"/login"} className="text-primary" onClick={() => setIsMenuToggled(false)}>
                   Login
                 </Link>
-                <Link href={"/#prices"} className="text-primary" onClick={() => setIsMenuToggled(false)}>
+                <Link href={"/apply"} className="text-primary" onClick={() => setIsMenuToggled(false)}>
                   Apply
                 </Link>
                 {/* <Button

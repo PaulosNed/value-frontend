@@ -86,7 +86,7 @@ export function DropdownNavigationMenu({
             </DropdownMenuItem>
             <DropdownMenuItem>
               <FaRegistered className="mr-2 h-4 w-4" />
-              <Link href='/#prices'>Signup</Link>
+              <Link href='/apply'>Signup</Link>
             </DropdownMenuItem>
           </>
         )}
